@@ -3,10 +3,16 @@
 exports.up = (knex) => {
   return knex.schema.createTable('users_search_history', (table) => {
     table.increments();
-    table.integer('users_id')
+    table.integer('user_id')
       .notNullable()
       .references('id')
       .inTable('users')
+      .onDelete('CASCADE')
+      .index();
+    table.integer('search_history_id')
+      .notNullable()
+      .references('id')
+      .inTable('search_history')
       .onDelete('CASCADE')
       .index();
     table.timestamp('searched_at').notNullable().defaultTo(knex.fn.now());

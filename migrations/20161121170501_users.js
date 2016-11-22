@@ -6,10 +6,10 @@ exports.up = (knex) => {
     table.string('email').notNullable().unique();
     table.specificType('hashed_password', 'char(60)')
      .notNullable();
-     table.timestamps(true, true);
+    table.timestamps(true, true);
   })
 };
 
 exports.down = (knex) => {
-
+  return knex.schema.dropTable('users');
 };

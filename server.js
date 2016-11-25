@@ -30,7 +30,7 @@ switch (app.get('env')) {
 //public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-//CSRF protection
+// CSRF protection
 app.use((req, res, next) => {
   if (/json/.test(req.get('Accept'))) {
     return next();

@@ -31,7 +31,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
         .insert(decamelizeKeys(insertUser), '*');
     })
     .then((rows) => {
-      const user = camelizeKeys(rows[0]);
+      const user = camelizeKeys(rows[0].meal);
 
       delete user.hashedPassword;
 

@@ -25,6 +25,8 @@ function authorize(req, res, next) {
 
 router.get('/token', authorize, (req, res, next) => {
   res.send(req.verify);
+
+  const { userId } = req.token; 
 });
 
 router.post('/token', ev(validations.post), (req, res, next) => {

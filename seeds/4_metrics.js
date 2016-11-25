@@ -7,6 +7,7 @@ exports.seed = function(knex) {
     return knex('metrics').insert([
       {
         id: 1,
+        user_id: 1,
         age: 35,
         weight: 75,
         height: 175,
@@ -17,6 +18,7 @@ exports.seed = function(knex) {
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
         id: 2,
+        user_id: 2,
         age: 22,
         weight: 120,
         height: 150,

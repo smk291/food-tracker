@@ -1,8 +1,31 @@
+'use strict';
 
-exports.up = function(knex, Promise) {
-  
+exports.up = (knex) => {
+  return knex.schema.createTable('users_meals', (table) => {
+    table.increments();
+    table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
+    table.integer('meal_id')
+      .notNullable()
+      .references('id')
+      .inTable('meals')
+      .onDelete('CASCADE')
+      .index();
+    table.boolean('in_plan')
+      .notNullable();
+    // table.string('intake')
+    //   .notNullable()
+    //   .index();
+    table.timestamps(true, true);
+
+      // Time of meal so as to use entry more than once?
+  });
 };
 
-exports.down = function(knex, Promise) {
-  
+exports.down = (knex) => {
+  return knex.schema.dropTable('users_meals');
 };

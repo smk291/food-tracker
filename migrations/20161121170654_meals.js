@@ -1,8 +1,17 @@
+'use strict';
 
-exports.up = function(knex, Promise) {
-  
+exports.up = (knex) => {
+  return knex.schema.createTable('meals', (table) => {
+    table.increments();
+    table.string('name')
+      .notNullable()
+      .index();
+    table.jsonb('meal')
+      .index();
+    table.timestamps(true, true);
+  });
 };
 
-exports.down = function(knex, Promise) {
-  
+exports.down = (knex) => {
+  return knex.schema.dropTable('meals');
 };

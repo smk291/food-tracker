@@ -42,10 +42,17 @@ app.use((req, res, next) => {
 //routes start here
 const users = require('./routes/users');
 const token = require('./routes/token');
+const meals = require('./routes/meals');
+const users_meals = require('./routes/users_meals');
+const metrics = require('./routes/metrics');
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(users);
 app.use(token);
+app.use(meals);
+app.use(users_meals);
+app.use(metrics);
 //routes end here
 
 app.use((_req, res) => {

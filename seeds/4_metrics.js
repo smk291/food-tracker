@@ -1,13 +1,33 @@
+/* eslint-disable max-len, camelcase */
 
-exports.seed = function(knex, Promise) {
-  // // Deletes ALL existing entries
-  // return knex('table_name').del()
-  //   .then(function () {
-  //     return Promise.all([
-  //       // Inserts seed entries
-  //       knex('table_name').insert({id: 1, colName: 'rowValue1'}),
-  //       knex('table_name').insert({id: 2, colName: 'rowValue2'}),
-  //       knex('table_name').insert({id: 3, colName: 'rowValue3'})
-  //     ]);
-  //   });
+'use strict';
+
+exports.seed = function(knex) {
+  return knex('metrics').del().then(() => {
+    return knex('metrics').insert([
+      {
+        id: 1,
+        age: 35,
+        weight: 75,
+        height: 175,
+        activities: {"activities": ["running", "biking", "soccer"]},
+        allergies: {"allergies": ["peanuts"]},
+        preferences: {};
+        created_at: new Date('2016-06-26 14:26:16 UTC'),
+        updated_at: new Date('2016-06-26 14:26:16 UTC')
+      }, {
+        id: 1,
+        age: 22,
+        weight: 120,
+        height: 150,
+        activities: {"activities": ["rock climbing", "group fitness", "yoga"]},
+        allergies: {},
+        preferences: {},
+        created_at: new Date('2016-06-26 14:26:16 UTC'),
+        updated_at: new Date('2016-06-26 14:26:16 UTC')
+      }
+    ]);
+  }).then(() => {
+    return knex.raw("SELECT setval('metrics_id_seq', (SELECT MAX(id) FROM metrics));");
+  });
 };

@@ -5,7 +5,7 @@ exports.up = (knex) => {
     table.increments();
     table.integer('age');
     table.float('weight');
-    table.integer('height');
+    table.float('height');
     table.jsonb('activities');
     table.jsonb('allergies');
     table.jsonb('preferences');

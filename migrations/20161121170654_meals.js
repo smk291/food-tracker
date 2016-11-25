@@ -7,6 +7,7 @@ exports.up = (knex) => {
       .notNullable()
       .index();
     table.jsonb('meal')
+      .notNullable()
       .index();
     table.timestamps(true, true);
   });

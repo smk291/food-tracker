@@ -12,11 +12,11 @@ exports.seed = function(knex) {
         height: 175,
         activities: {"activities": ["running", "biking", "soccer"]},
         allergies: {"allergies": ["peanuts"]},
-        preferences: {};
+        preferences: {},
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
-        id: 1,
+        id: 2,
         age: 22,
         weight: 120,
         height: 150,

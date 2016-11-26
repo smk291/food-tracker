@@ -30,47 +30,53 @@ const authorize = function(req, res, next) {
 router.post('/metrics', authorize, /*ev(validations.post),*/ (req, res, next) => {
   const { userId } = req.token;
 
-  const { age, weight, height, activities, allergies, preferences, goals } = req.body;
-
-  const newMetrics = {}
-
-  newMetrics.userId = userId;
-
-  if(age){
-    newMetrics.age = age
-  }
-
-  if(weight){
-    newMetrics.weight = weight
-  }
-
-  if(height){
-    newMetrics.height = height;
-  }
-
-  if(activities){
-    newMetrics.activities = activities;
-  }
-
-  if(allergies){
-    newMetrics.allergies = allergies;
-  }
-
-  if(preferences){
-    newMetrics.preferences = preferences;
-  }
-
-  if(goals){
-    newMetrics.goals = goals;
-  }
-
-  console.log(newMetrics)
-
   knex('metrics')
-    .insert(decamelizeKeys(newMetrics), '*')
+    .where('user_id', userId)
+    .first()
     .then((row) => {
-      res.send(row)
-    })
+      if (row) {
+        throw boom.create(400, `Metrics already exist for user.id ${userId}`);
+      }
+
+      const { age, weight, height, activities, allergies, preferences, goals } = req.body;
+      const newMetrics = {};
+
+      newMetrics.userId = userId;
+
+      if(age){
+        newMetrics.age = age
+      }
+
+      if(weight){
+        newMetrics.weight = weight
+      }
+
+      if(height){
+        newMetrics.height = height;
+      }
+
+      if(activities){
+        newMetrics.activities = activities;
+      }
+
+      if(allergies){
+        newMetrics.allergies = allergies;
+      }
+
+      if(preferences){
+        newMetrics.preferences = preferences;
+      }
+
+      if(goals){
+        newMetrics.goals = goals;
+      }
+
+      knex('metrics')
+        .insert(decamelizeKeys(newMetrics), '*')
+        .then((row) => {
+          res.send(row)
+        });
+      })
     .catch((err) => {
       next(err);
     });
@@ -109,15 +115,16 @@ router.get('/metrics/:id', authorize, (req, res, next) => {
 // Patch a user's metrics
 router.patch('/metrics', authorize, /*ev(validations.post),*/ (req, res, next) => {
   const { userId } = req.token;
-
-
-
   const { age, weight, height, activities, allergies, preferences, goals } = req.body;
 
   knex('metrics')
     .where('user_id', userId)
     .first()
     .then((row) => {
+      if (!row) {
+        throw boom.create(400, `No metrics exist for current user`)
+      }
+
       const updateMetrics = {};
       updateMetrics.userId = userId;
 
@@ -148,8 +155,6 @@ router.patch('/metrics', authorize, /*ev(validations.post),*/ (req, res, next) =
       if(goals){
         updateMetrics.goals = goals;
       }
-
-      console.log(updateMetrics);
 
       return knex('metrics')
         .where('user_id', userId)

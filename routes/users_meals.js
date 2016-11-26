@@ -29,7 +29,7 @@ const authorize = function(req, res, next) {
 // Post user_meal
 // Accomplished from the users route
 
-//Get individual user_meal
+//Get individual user_meal without data from meal table
 router.get('/users_meals/:id', authorize, (req, res, next) => {
   const { userId } = req.token;
   const mealId  = req.params.id;
@@ -40,6 +40,10 @@ router.get('/users_meals/:id', authorize, (req, res, next) => {
     .where('meal_id', mealId)
     .first()
     .then((userMeal) => {
+      if (!userMeal) {
+        throw boom.create(400, `No meal listed for user.id ${userId} at meal.id ${mealId}`);
+      }
+
       res.send(userMeal);
     })
     .catch((err) => {
@@ -59,6 +63,10 @@ router.get('/users_meals_data/:id', authorize, (req, res, next) => {
     .where('meal_id', mealId)
     .innerJoin('meals', 'meals.id', 'users_meals.meal_id')
     .then((userMeal) => {
+      if (!userMeal) {
+        throw boom.create(400, `No meal listed for user.id ${userId} at meal.id ${mealId}`);
+      }
+
       res.send(userMeal);
     })
     .catch((err) => {

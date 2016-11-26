@@ -74,7 +74,7 @@ router.get('/meals', authorize, (req, res, next) => {
   knex('meals')
     .then((meals) => {
       if (meals === [] || !meals) {
-        throw boom.create(400, `No meals exist for user`)
+        throw boom.create(400, `No meals found`);
       }
 
       res.send(meals);
@@ -88,24 +88,44 @@ router.get('/meals', authorize, (req, res, next) => {
 router.patch('/meals/:id', authorize, /*ev(validations.post),*/ (req, res, next) => {
   const { name, meal } = req.body;
   const { id } = req.params;
+  const { userId } = req.token;
 
   knex('meals')
-    .where('id', id)
-    .first()
-    .then((row) => {
-      const updateRow = {};
+  .where('id', id)
+  .first()
+  .then((row) => {
+    console.log(row);
 
-      if (name) {
-        updateRow.name = name;
-      }
+    if (!row) {
+      throw boom.create(400, `No meal found at meals.id ${id}`);
+    }
 
-      if (meal) {
-        updateRow.meal = meal;
-      }
+    knex('users_meals')
+      .where('user_id', userId)
+      .where('meal_id', id)
+      .first()
+      .then((row) => {
+        if (!row) {
+          throw boom.create(400, `Meal at meal.id ${id} does not belong to user.id ${userId}`);
+        }
+      })
+      .catch((err) => {
+        next(err);
+      })
 
-      return knex('meals')
-        .where('id', id)
-        .update(decamelizeKeys(updateRow), '*');
+    const updateRow = {};
+
+    if (name) {
+      updateRow.name = name;
+    }
+
+    if (meal) {
+      updateRow.meal = meal;
+    }
+
+    return knex('meals')
+      .where('id', id)
+      .update(decamelizeKeys(updateRow), '*');
     })
     .then((row) =>  {
       res.send(camelizeKeys(row));

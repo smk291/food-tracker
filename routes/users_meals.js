@@ -107,4 +107,8 @@ router.get('/users_meals_data/', authorize, (req, res, next) => {
 
 });
 
+// Patch unnecessary
+
+// Delete handled by meals delete route
+
 module.exports = router;

@@ -7,7 +7,7 @@ const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
 const boom = require('boom');
 const ev = require('express-validation');
-const validations = require('../validations/users');
+const validations = require('../validations/metrics');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 const jwt = require('jsonwebtoken');
 
@@ -27,7 +27,7 @@ const authorize = function(req, res, next) {
 };
 
 //Post user's metrics
-router.post('/metrics', authorize, /*ev(validations.post),*/ (req, res, next) => {
+router.post('/metrics', authorize, ev(validations.post), (req, res, next) => {
   const { userId } = req.token;
 
   knex('metrics')
@@ -113,7 +113,7 @@ router.get('/metrics/:id', authorize, (req, res, next) => {
 });
 
 // Patch a user's metrics
-router.patch('/metrics', authorize, /*ev(validations.post),*/ (req, res, next) => {
+router.patch('/metrics', authorize, ev(validations.post), (req, res, next) => {
   const { userId } = req.token;
   const { age, weight, height, activities, allergies, preferences, goals } = req.body;
 

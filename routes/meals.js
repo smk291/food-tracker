@@ -28,7 +28,7 @@ const authorize = function(req, res, next) {
 
 
 //Post meal
-router.post('/meals', authorize, /*ev(validations.post),*/ (req, res, next) => {
+router.post('/meals', authorize, ev(validations.post), (req, res, next) => {
   const { name, meal, inPlan } = req.body;
   const { userId } = req.token;
 
@@ -36,8 +36,9 @@ router.post('/meals', authorize, /*ev(validations.post),*/ (req, res, next) => {
     .insert(decamelizeKeys({name, meal}), '*')
     .returning('id')
     .then((id) => {
+      console.log(inPlan);
       knex('users_meals')
-        .insert(decamelizeKeys({userId, mealId: id[0], inPlan: true}), '*')
+        .insert(decamelizeKeys({userId, mealId: id[0], inPlan}), '*')
         .then((userMealRow) => {
             res.send(decamelizeKeys(userMealRow));
         });
@@ -85,7 +86,7 @@ router.get('/meals', authorize, (req, res, next) => {
 });
 
 // Patch a meal
-router.patch('/meals/:id', authorize, /*ev(validations.post),*/ (req, res, next) => {
+router.patch('/meals/:id', authorize, ev(validations.post), (req, res, next) => {
   const { name, meal } = req.body;
   const { id } = req.params;
   const { userId } = req.token;
@@ -129,6 +130,60 @@ router.patch('/meals/:id', authorize, /*ev(validations.post),*/ (req, res, next)
     })
     .then((row) =>  {
       res.send(camelizeKeys(row));
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete('/meals/:id', authorize, (req, res, next) => {
+  const mealId = req.params.id;
+  const { userId } = req.token;
+  const deleted = {}
+
+  knex('meals')
+    .where('id', mealId)
+    .first()
+    .then((row) => {
+      if (!row) {
+        throw boom.create(400, `No meal at meal.id ${mealId}`);
+      }
+
+      deleted.fromMeals = camelizeKeys(row);
+
+      knex('users_meals')
+      .where('meal_id', mealId)
+      .then((row) => {
+        if (Number(row.user_id) !== userId && row.user_id) {
+          throw boom.create(400, `Meal_id ${mealId} does not belong to current user user.id ${userId}`)
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+    })
+    .then(() => {
+      knex('users_meals')
+      .where('meal_id', mealId)
+      .where('user_id', userId)
+      .first()
+      .then((row) => {
+        if (!row) {
+          throw boom.create(400, `meal.id ${mealId} exists in meals, but there's no entry for it in users_meals. This shouldn't be possible.`);
+        }
+
+        deleted.fromMealsUsers = camelizeKeys(row);
+
+        return knex('meals')
+          .where('id', mealId)
+          .del();
+      })
+      .then(() => {
+        res.send(deleted);
+      })
+      .catch((err) => {
+        next(err);
+      })
     })
     .catch((err) => {
       next(err);

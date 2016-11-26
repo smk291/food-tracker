@@ -15,7 +15,7 @@ exports.up = (knex) => {
     table.jsonb('activities');
     table.jsonb('allergies');
     table.jsonb('preferences');
-    table.text('goals')
+    table.string('goals')
       .defaultTo('');
     table.timestamps(true, true);
       // Time of meal so as to use entry more than once?

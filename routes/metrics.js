@@ -39,37 +39,9 @@ router.post('/metrics', authorize, ev(validations.post), (req, res, next) => {
       }
 
       const { age, weight, height, activities, allergies, preferences, goals } = req.body;
-      const newMetrics = {};
+      const newMetrics = { age, weight, height, activities, allergies, preferences, goals };
 
       newMetrics.userId = userId;
-
-      if(age){
-        newMetrics.age = age
-      }
-
-      if(weight){
-        newMetrics.weight = weight
-      }
-
-      if(height){
-        newMetrics.height = height;
-      }
-
-      if(activities){
-        newMetrics.activities = activities;
-      }
-
-      if(allergies){
-        newMetrics.allergies = allergies;
-      }
-
-      if(preferences){
-        newMetrics.preferences = preferences;
-      }
-
-      if(goals){
-        newMetrics.goals = goals;
-      }
 
       knex('metrics')
         .insert(decamelizeKeys(newMetrics), '*')
@@ -125,36 +97,9 @@ router.patch('/metrics', authorize, ev(validations.post), (req, res, next) => {
         throw boom.create(400, `No metrics exist for current user`)
       }
 
-      const updateMetrics = {};
+      const updateMetrics = { age, weight, height, activities, allergies, preferences, goals};
       updateMetrics.userId = userId;
 
-      if (age){
-        updateMetrics.age = age
-      }
-
-      if(weight){
-        updateMetrics.weight = weight
-      }
-
-      if(height){
-        updateMetrics.height = height;
-      }
-
-      if(activities){
-        updateMetrics.activities = activities;
-      }
-
-      if(allergies){
-        updateMetrics.allergies = allergies;
-      }
-
-      if(preferences){
-        updateMetrics.preferences = preferences;
-      }
-
-      if(goals){
-        updateMetrics.goals = goals;
-      }
 
       return knex('metrics')
         .where('user_id', userId)

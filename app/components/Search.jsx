@@ -1,10 +1,6 @@
 import React from 'react';
 
 const Search = React.createClass({
-  updateSearchString (e) {
-    this.props.updateSearchString(e);
-  },
-
   searchForMeal(e) {
     this.props.searchForMeal(e);
   },
@@ -12,8 +8,8 @@ const Search = React.createClass({
   render() {
     return (
       <div>
-        <input placeholder="Search for food/ingredients" name="search" ref="mealSearch" value={this.props.searchString} onChange={this.updateSearchString}/>
-        <button name="searchButton" id="searchInput" type="text" onClick={this.searchForMeal}>Log in</button>
+        <input placeholder="Search for food/ingredients" name="search" ref="mealSearch" value={this.props.searchString} onChange={this.props.handleChange.bind(null, 'searchString')}/>
+        <button name="searchButton" id="searchInput" type="text" onClick={this.searchForMeal}>Search</button>
       </div>
     )
   }

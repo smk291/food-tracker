@@ -10,7 +10,15 @@ const App = React.createClass({
       meal: [],
       email: '',
       password: '',
-      searchString: ''
+      searchString: '',
+      signUpEamil: '',
+      signUpPassword: '',
+      firstName: '',
+      lastName: '',
+      firstName: '',
+      lastName: '',
+      signupEmail: '',
+      signupPassword: ''
     };
   },
 
@@ -29,22 +37,37 @@ const App = React.createClass({
     })
     .then((res) => {
       console.log('Sucess');
+      console.log(res);
     })
     .catch((err) => {
       console.log(err);
     });
   },
 
-  updateEmail(e) {
+  signUp (e) {
     e.preventDefault();
-
-    this.setState({email: e.target.value})
+    axios({
+      method: 'post',
+      url: '/users',
+      data: {
+        lastName: this.state.lastName,
+        firstName: this.state.firstName,
+        email: this.state.signupEmail,
+        password: this.state.signupPassword
+      }
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   },
 
-  updatePassword(e) {
-    e.preventDefault();
-
-    this.setState({password: e.target.value});
+  handleChange(name, e) {
+    var change = {};
+    change[name] = e.target.value;
+    this.setState(change);
   },
 
   searchForMeal(e) {
@@ -74,12 +97,6 @@ const App = React.createClass({
     });
   },
 
-  updateSearchString(e) {
-    e.preventDefault();
-
-    this.setState({searchString: e.target.value})
-  },
-
   render() {
     return (
       <BrowserRouter>
@@ -91,10 +108,13 @@ const App = React.createClass({
               meal={this.state.meal}
               searchString={this.state.searchString}
               login={this.login}
-              updateEmail={this.updateEmail}
-              updatePassword={this.updatePassword}
               searchForMeal={this.searchForMeal}
-              updateSearchString={this.updateSearchString}
+              handleChange={this.handleChange}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              signupEmail={this.state.signupEmail}
+              signupPassword={this.state.signupPassword}
+              signUp={this.signUp}
             />
           }/>
         </div>

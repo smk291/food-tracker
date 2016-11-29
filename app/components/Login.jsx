@@ -1,14 +1,6 @@
 import React from 'react';
 
 const Login = React.createClass({
-  updateEmail(e) {
-    this.props.updateEmail(e);
-  },
-
-  updatePassword(e) {
-    this.props.updatePassword(e);
-  },
-
   login(e) {
     this.props.login(e);
   },
@@ -18,9 +10,9 @@ const Login = React.createClass({
       <div id="content">
         <div id="login">
           <form id="loginForm">
-            <input placeholder="Email" id="email" type="text" value={this.props.email} name="email" onChange={this.updateEmail}/>
+            <input placeholder="Email" ref="email" id="email" type="text" value={this.props.email} name="email" onChange={this.props.handleChange.bind(null, 'email')}/>
 
-            <input placeholder="Password" id="password" type="password" value={this.props.password} name="password" onChange={this.updatePassword}/>
+            <input placeholder="Password" id="password" type="password" value={this.props.password} name="password" onChange={this.props.handleChange.bind(null, 'password')}/>
 
             <button name="login" type="text" onClick={this.login}>Log in</button>
           </form>

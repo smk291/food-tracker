@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './Login';
 import Search from './Search';
 import Search_Results from './Search_Results';
+import SignUp from './SignUp';
 
 const Main = React.createClass({
   render() {
@@ -12,13 +13,20 @@ const Main = React.createClass({
           password={this.props.password}
           meal={this.props.meal}
           login={this.props.login}
-          updateEmail={this.props.updateEmail}
-          updatePassword={this.props.updatePassword}
+          handleChange={this.props.handleChange}
+        />
+        <SignUp
+          firstName={this.props.firstName}
+          lastName={this.props.lastName}
+          signupEmail={this.props.signupEmail}
+          signupPassword={this.props.signupPassword}
+          handleChange={this.props.handleChange}
+          signUp={this.props.signUp}
         />
         <Search
           searchString={this.props.searchString}
           searchForMeal={this.props.searchForMeal}
-          updateSearchString={this.props.updateSearchString}
+          handleChange={this.props.handleChange}
         />
         {this.props.meal.length > 0 && this.props.meal[0].data.foods.map((obj, idx) => {
           console.log(obj);

@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from './Footer';
+import SignLog from './SignLog';
 
 export default class Main extends React.Component {
   render() {
@@ -17,13 +18,7 @@ export default class Main extends React.Component {
             <p>Some descriptions</p>
           </div>
         </div>
-        <div className="section with-background">
-          <div className="container">
-            <h3>Let's get started!</h3>
-            <a className="button button-primary" href="#">Sign Up</a>
-            <a className="button button-primary" href="#">Log In</a>
-          </div>
-        </div>
+        <SignLog />
         <Footer />
       </main>
     );

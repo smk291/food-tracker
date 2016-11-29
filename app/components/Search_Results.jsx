@@ -5,7 +5,6 @@ const Search_Results = React.createClass({
   render() {
     return (
       <div>
-        <p>hi!</p>
         <p>meal: {this.props.meal}</p>
         <p>ndb_no: {this.props.ndb_no}</p>
         <p>nf_calories: {this.props.nf_calories} kcal</p>

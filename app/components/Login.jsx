@@ -13,11 +13,6 @@ const Login = React.createClass({
     this.props.login(e);
   },
 
- //  componentDidMount() {
- //   $(ReactDOM.findDOMNode(this.refs.selectBox)).on('change', this.props.handleChangeDropDown);
- //   console.log(this.refs.selectBox);
- // },
-
   render() {
     return (
       <div id="content">

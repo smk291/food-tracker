@@ -44,8 +44,7 @@ const Main = React.createClass({
             thumb={obj.photo.thumb}
             highres={obj.photo.highres}
           />;
-          // For breakfast I had four scrambled eggs, two slices of wheat toast with two tbsp of butter and a cup of coffee
-          })}
+        })}
       </div>
     )
   }

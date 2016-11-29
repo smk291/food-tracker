@@ -1,6 +1,4 @@
-// import Header from './Header';
 import Main from './Main';
-// import Footer from './Footer';
 import {BrowserRouter, Link, Match} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';

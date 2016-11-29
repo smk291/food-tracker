@@ -3,28 +3,20 @@ import React from 'react';
 export default class Footer extends React.Component {
   render() {
     return (
-      <footer className="page-footer">
+      <footer className="footer">
         <div className="container">
           <div className="row">
-            <div className="col l6 s12">
-              <h5 className="white-text">Footer Content</h5>
-              <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            <div className="two-thirds column">
+              <h5>Food App Tracker</h5>
+              <p id="copyright">© 2016 F.A.T</p>
             </div>
-            <div className="col l4 offset-l2 s12">
-              <h5 className="white-text">Links</h5>
+            <div className="one-third column">
               <ul>
-                <li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                <li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                <li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                <li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                <li>Log In</li>
+                <li>Sign Up</li>
+                <li><a href="https://mikeechen-jquerycalc.surge.sh/">Need a Calculator?</a></li>
               </ul>
             </div>
-          </div>
-        </div>
-        <div className="footer-copyright">
-          <div className="container">
-          © 2014 Copyright Text
-          <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
           </div>
         </div>
       </footer>

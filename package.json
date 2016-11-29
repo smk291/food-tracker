@@ -13,7 +13,7 @@
     "knex": "knex"
   },
   "dependencies": {
-    "axios": "^0.15.2",
+    "axios": "^0.15.3",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
     "boom": "^4.2.0",
@@ -28,6 +28,7 @@
     "pg": "^6.1.0",
     "react": "~15.3.0",
     "react-dom": "~15.3.0",
+    "react-router": "^4.0.0-alpha.6",
     "request": "^2.79.0",
     "request-promise": "^4.1.1"
   },

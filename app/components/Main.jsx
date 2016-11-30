@@ -63,7 +63,9 @@ const Main = React.createClass({
         <PostMeal
           meal={this.props.meal}
           postMeal={this.props.postMeal}
-          body={this.props.body}
+          handleChange={this.props.handleChange}
+          mealName={this.props.mealName}
+          name={this.props.name}
         />
         <MealDetail
           mealDetail={this.props.mealDetail}

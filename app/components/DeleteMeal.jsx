@@ -2,7 +2,6 @@ import React from 'react';
 
 const DeleteMeal = React.createClass({
   deleteMeal(){
-    console.log(`Imma delete meal at meal.id ${this.props.meal.id}`);
     this.props.handleDeleteMeal(this.props.meal.id);
   },
 
@@ -14,8 +13,7 @@ const DeleteMeal = React.createClass({
           type="text"
           name="deleteThisMeal"
           onClick={this.deleteMeal}
-        >
-          Delete this meal
+        >Delete this meal
         </button>
       </div>
     );

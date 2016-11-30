@@ -27,11 +27,7 @@ const App = React.createClass({
       lastName: '',
       signupEmail: '',
       signupPassword: '',
-      body: {
-        name: '',
-        meal: '',
-        inPlan: false,
-      },
+      name: '',
       listOfMeals: [],
       usersMeals: [{}],
       mealDetail: []
@@ -52,7 +48,6 @@ const App = React.createClass({
       }
     })
     .then((res) => {
-      console.log('Sucess');
       console.log(res);
     })
     .catch((err) => {
@@ -75,6 +70,7 @@ const App = React.createClass({
 
   signUp (e) {
     e.preventDefault();
+
     axios({
       method: 'post',
       url: '/users',
@@ -102,6 +98,8 @@ const App = React.createClass({
   searchForMeal(e) {
     e.preventDefault();
 
+    let meal = {};
+
     axios({
       method: 'post',
       url: 'https://trackapi.nutritionix.com//v2/natural/nutrients',
@@ -117,37 +115,38 @@ const App = React.createClass({
       }
     })
     .then((res) => {
+      meal = res;
       this.setState({meal: [res]});
+      console.log(res);
     })
     .then(() => {
-      console.log(meal);
-      const entryName = this.props.meal.map((meal) => {
-        return `${meal.food_name} (${meal.serving_qty}), `;
-      });
-      this.setState({body: {
-        name: entryName,
-        meal: this.state.meal,
-        inPlan: false
-      }})
-    })
-    .then(() => {
-      console.log(this.state.body);
-      console.log('success');
+      const entryName = meal.data.foods.reduce((acc, food, idx, arr) => {
+        console.log(idx);
+        console.log(arr.length);
+        if (idx < arr.length - 1){
+          return acc += `${food.food_name} (${food.serving_qty}), `;
+        } else {
+          return acc += `${food.food_name} (${food.serving_qty})`;
+        }
+      }, '');
+
+      this.setState({name: entryName})
     }).catch((err) => {
       console.log(err);
     });
   },
 
-  postMeal (e, data) {
-    e.preventDefault();
-
+  postMeal (name, meal) {
     axios({
       method: 'post',
       url: '/meals',
-      data: data
+      data: {
+        name: name,
+        meal: meal,
+        inPlan: false
+      }
     })
     .then((res) => {
-      console.log('success');
       console.log(res);
     })
     .then(() => {
@@ -157,41 +156,29 @@ const App = React.createClass({
   },
 
   handleGetUserMeals () {
-    console.log('!hi!');
-    const listMeals = [];
-
     let usersMeals = [];
+
     axios({
       method: 'get',
       url: '/users_meals_data'
     })
     .then((res) => {
-      console.log('is this working');
-      console.log(res.data);
       usersMeals = res.data;
       this.setState({usersMeals: res.data});
-    })
-    .then(() => {
-      console.log(this.state.usersMeals);
     })
     .catch((err) => {
       console.log(err);
     });
   },
 
-  handlePatchMeal (e, id, data) {
-    e.preventDefault();
-
+  handlePatchMeal (id, data) {
     axios({
       method: 'patch',
       url: `/meals/${id}`,
       data: data
     })
     .then((res) => {
-      console.log('success');
       console.log(res);
-    })
-    .then(() => {
     })
     .catch((err) => {
       console.log(err);
@@ -215,8 +202,7 @@ const App = React.createClass({
 
   },
 
-  handlePostMetrics (e, data) {
-    e.preventDefault();
+  handlePostMetrics (data) {
 
     axios({
       method: 'post',
@@ -224,10 +210,7 @@ const App = React.createClass({
       data: data
     })
     .then((res) => {
-      console.log('success');
       console.log(res);
-    })
-    .then(() => {
     })
     .catch((err) => {
       console.log(err);
@@ -243,7 +226,6 @@ const App = React.createClass({
       data: data
     })
     .then((res) => {
-      console.log('success');
       console.log(res);
     })
     .then(() => {
@@ -254,7 +236,6 @@ const App = React.createClass({
   },
 
   handleGetAMeal(id) {
-    console.log(`id is ${id}`);
     axios({
       method: 'get',
       url: `/users_meals_data/${id}`
@@ -262,11 +243,6 @@ const App = React.createClass({
     .then((res) => {
       const mealDetail = res.data;
       this.setState({mealDetail});
-      console.log(mealDetail);
-      console.log('success');
-    })
-    .then(() => {
-      console.log(this.state.mealDetail);
     })
     .catch((err) => {
       console.log(err);
@@ -292,7 +268,7 @@ const App = React.createClass({
               signupPassword={this.state.signupPassword}
               signUp={this.signUp}
               postMeal={this.postMeal}
-              body={this.state.body}
+              name={this.state.name}
               handleGetUserMeals={this.handleGetUserMeals}
               usersMeals={this.state.usersMeals}
               handleGetAMeal={this.handleGetAMeal}

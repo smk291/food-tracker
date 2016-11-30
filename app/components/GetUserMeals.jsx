@@ -3,12 +3,10 @@ import Meal from './Meal';
 
 const GetUserMeals = React.createClass({
   handleGetUserMeals() {
-    console.log(('hi!'));
     this.props.handleGetUserMeals();
   },
 
   render() {
-    console.log(this.props.usersMeals);
     return (
       <div>
         <button

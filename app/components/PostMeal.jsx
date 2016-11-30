@@ -1,6 +1,13 @@
 import React from 'react';
 
-export default class PostMeal extends React.Component {
+const PostMeal = React.createClass({
+  postMeal(e) {
+    e.preventDefault();
+    console.log(this.props.meal);
+    console.log(this.props.name);
+    this.props.postMeal(this.props.name, this.props.meal[0]);
+  },
+
   render() {
     return (
       <div>
@@ -11,9 +18,9 @@ export default class PostMeal extends React.Component {
               ref="mealName"
               id="mealName"
               type="text"
-              value={this.props.body.name}
+              value={this.props.name}
               name="mealName"
-              // onChange={this.props.handleChange.bind(null, 'mealName')}
+              onChange={this.props.handleChange.bind(null, 'name')}
             />
 
             <button
@@ -27,4 +34,6 @@ export default class PostMeal extends React.Component {
       </div>
     );
   }
-}
+});
+
+export default PostMeal;

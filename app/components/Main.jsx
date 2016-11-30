@@ -10,6 +10,7 @@ import Logout from './Logout';
 import NutrData from './NutrData';
 import DisplayMealNutr from './DisplayMealNutr';
 import DisplayTotalMealNutr from './DisplayTotalMealNutr';
+import GetMealsAndSort from './GetMealsAndSort';
 
 const Main = React.createClass({
   render() {
@@ -39,7 +40,6 @@ const Main = React.createClass({
           handleChange={this.props.handleChange}
         />
         {this.props.meal.length > 0 && this.props.meal[0].data.foods.map((obj, idx) => {
-          console.log(obj);
           return <Search_Results
             key={idx}
             meal={obj.food_name}
@@ -72,7 +72,7 @@ const Main = React.createClass({
           postDate={this.props.postDate}
           postTime={this.props.postTime}
         />
-        <MealDetail
+        {/* <MealDetail
           mealDetail={this.props.mealDetail}
           handleUpdateMealDetail={this.props.handleUpdateMealDetail}
         />
@@ -97,6 +97,9 @@ const Main = React.createClass({
           mealTotalNutr={this.props.mealTotalNutr}
           handleSumMeals={this.props.handleSumMeals}
         />
+        <GetMealsAndSort
+          handleGetUserMealsDateSort={this.props.handleGetUserMealsDateSort}
+        /> */}
       </div>
     )
   }

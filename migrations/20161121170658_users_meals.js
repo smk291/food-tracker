@@ -17,8 +17,6 @@ exports.up = (knex) => {
       .index();
     table.boolean('in_plan');
     table.date('date')
-      .notNullable()
-      .defaultTo(knex.fn.now())
       .index();
     table.time('time')
       .notNullable()

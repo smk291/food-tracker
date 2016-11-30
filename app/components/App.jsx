@@ -11,6 +11,7 @@ import PatchMetrics from './PatchMetrics';
 import PostMeal from './PostMeal';
 import PostMetrics from './PostMetrics';
 import SignUp from './SignUp';
+import sortBy from 'lodash/sortBy';
 
 const App = React.createClass({
   getInitialState() {
@@ -33,6 +34,8 @@ const App = React.createClass({
       postTime: '',
       mealToDisplay: {},
       mealTotalNutr: {},
+      mealToPost: [],
+      usersMealsByDateAndTime: {},
       nutrIds: {
       	"203": ["g", "Protein"],
       	"204": ["g", "Total lipid (fat)"],
@@ -253,7 +256,7 @@ const App = React.createClass({
     e.preventDefault();
 
     let meal = {};
-
+    let mealToPost = []
     axios({
       method: 'post',
       url: 'https://trackapi.nutritionix.com//v2/natural/nutrients',
@@ -271,18 +274,32 @@ const App = React.createClass({
     .then((res) => {
       meal = res;
       this.setState({meal: [res]});
-      console.log(res);
+      console.log(res.data.foods);
+      for (let i = 0; i < res.data.foods.length; i++) {
+        let tempObj = {};
+        tempObj.food_name = res.data.foods[i].food_name;
+        tempObj.full_nutrients = res.data.foods[i].full_nutrients;
+        tempObj.full_nutrients = res.data.foods[i].full_nutrients;
+        tempObj.serving_qty = res.data.foods[i].serving_qty;
+        tempObj.serving_qty = res.data.foods[i].serving_qty;
+        tempObj.serving_unit = res.data.foods[i].serving_unit;
+        tempObj.photo = res.data.foods.photo;
+        mealToPost.push(tempObj);
+      }
+
+      this.setState({mealToPost})
     })
     .then(() => {
-      const entryName = meal.data.foods.reduce((acc, food, idx, arr) => {
-        if (idx < arr.length - 1){
+      console.log(this.state.mealToPost);
+      const mealName = mealToPost.reduce((acc, food, idx, arr) => {
+        if (idx < arr.length - 1) {
           return acc += `${food.food_name} (${food.serving_qty} ${food.serving_unit}), `;
         } else {
-          return acc += `${food.food_name} (${food.serving_qty})`;
+          return acc += `${food.food_name} (${food.serving_qty}  ${food.serving_unit})`;
         }
-      }, '');
+      }, ``);
 
-      this.setState({name: entryName})
+      this.setState({name: mealName})
     }).catch((err) => {
       console.log(err);
     });
@@ -301,6 +318,7 @@ const App = React.createClass({
     })
     .then((res) => {
       console.log(res);
+      console.log(res);
     })
     .then(() => {
     }).catch((err) => {
@@ -318,6 +336,48 @@ const App = React.createClass({
     .then((res) => {
       usersMeals = res.data;
       this.setState({usersMeals: res.data});
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+
+  handleGetUserMealsDateSort () {
+    let groupByDay = {};
+    let sumByDay = {}
+    axios({
+      method: 'get',
+      url: '/users_meals_data'
+    })
+    .then((res) => {
+      this.setState({usersMeals: res.data});
+    })
+    .then(() => {
+      this.state.usersMeals.reduce((acc, meal, idx) => {
+        if (groupByDay.hasOwnProperty(meal.date)){
+          groupByDay[meal.date].push(meal);
+        } else {
+          groupByDay[meal.date] = [meal];
+        }
+      }, {})
+      console.log(groupByDay);
+      for (let key in groupByDay) {
+        console.log(groupByDay[key]);
+        for (let i = 0; i < groupByDay[key].length; i++) {
+          // console.log(groupByDay[key][i].meal.data.foods);
+          for (let j = 0; j < groupByDay[key][i].meal.data.foods.length; j++) {
+            for (let food in groupByDay[key][i].meal.data.foods[j])
+              // groupByDay[key][i].meal.data.foods[j][food]
+              // sumByDay[key]// console.log(groupByDay[key][i].meal.data.foods[j]);
+              // console.log(groupByDay[key][i].meal.data.foods[j].full_nutrients);
+              for (let k = 0; k < groupByDay[key][i].meal.data.foods[j].full_nutrients.length; k++) {
+                console.log(this.state.nutrIds[groupByDay[key][i].meal.data.foods[j].full_nutrients[k].attr_id][1]);
+                console.log(groupByDay[key][i].meal.data.foods[j].full_nutrients[k].value);
+                console.log(this.state.nutrIds[groupByDay[key][i].meal.data.foods[j].full_nutrients[k].attr_id][0]);
+              }
+          }
+        }
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -449,7 +509,7 @@ const App = React.createClass({
     console.log(sumContainer);
   },
 
-
+  sumMealsInput(){},
 
   render() {
     return (
@@ -485,6 +545,7 @@ const App = React.createClass({
               mealToDisplay={this.state.mealToDisplay}
               mealTotalNutr={this.state.MealTotalNutr}
               handleSumMeals={this.handleSumMeals}
+              handleGetUserMealsDateSort={this.handleGetUserMealsDateSort}
             />
           }/>
         </div>

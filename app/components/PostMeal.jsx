@@ -5,7 +5,7 @@ const PostMeal = React.createClass({
     e.preventDefault();
     console.log(this.props.meal);
     console.log(this.props.name);
-    this.props.postMeal(this.props.name, this.props.meal[0], this.props.date, this.props.time);
+    this.props.postMeal(this.props.name, this.props.meal[0], this.props.postDate, this.props.time);
   },
 
   render() {

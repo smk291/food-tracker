@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
     axios.get('/token')
-      .then((res) => this.setState({ loggedIn: false }))
+      .then((res) => this.setState({ loggedIn: res.data }))
       .catch((err) => console.error(err.message));
   }
 

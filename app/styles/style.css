@@ -8,9 +8,19 @@ main {
   flex: 1 0 auto;
 }
 
+form label {
+  text-align: left;
+}
+
 .with-background {
   background-image: url('./Banner.jpg');
   background-size: cover;
+}
+
+.with-second-background {
+  background-image: url('./SecondBanner.jpg');
+  background-size: cover;
+  height: 50vh;
 }
 
 .section {
@@ -22,6 +32,7 @@ main {
   padding: 2rem 0 6rem;
   color: #fff;
   background-color: #5e6063;
+  margin-top: auto;
 }
 
 .section-heading,
@@ -40,6 +51,7 @@ main {
 .footer ul {
   list-style: none;
 }
+
 
 #copyright {
   position: absolute;

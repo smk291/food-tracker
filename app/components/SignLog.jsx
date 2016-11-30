@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class SignLog extends React.Component {
   render() {
@@ -6,8 +7,8 @@ export default class SignLog extends React.Component {
       <div className="section with-background">
         <div className="container">
           <h3>Let's get started!</h3>
-          <a className="button button-primary" href="#">Sign Up</a>
-          <a className="button button-primary" href="#">Log In</a>
+          <Link className="button button-primary" to="/signUp">Sign Up</Link>
+          <Link className="button button-primary" to="/LogIn">Log In</Link>
         </div>
       </div>
     );

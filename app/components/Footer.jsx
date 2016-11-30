@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class Footer extends React.Component {
   render() {
@@ -12,8 +13,9 @@ export default class Footer extends React.Component {
             </div>
             <div className="one-third column">
               <ul>
-                <li>Log In</li>
-                <li>Sign Up</li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/logIn">Log In</Link></li>
+                <li><Link to="/signUp">Sign Up</Link></li>
                 <li><a href="https://mikeechen-jquerycalc.surge.sh/">Need a Calculator?</a></li>
               </ul>
             </div>

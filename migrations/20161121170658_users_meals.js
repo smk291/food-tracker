@@ -20,6 +20,14 @@ exports.up = (knex) => {
     // table.string('intake')
     //   .notNullable()
     //   .index();
+    table.date('date')
+      .notNullable()
+      .defaultTo(knex.fn.now())
+      .index();
+    table.time('time')
+      .notNullable()
+      .defaultTo(knex.fn.now())
+      .index();
     table.timestamps(true, true);
 
       // Time of meal so as to use entry more than once?

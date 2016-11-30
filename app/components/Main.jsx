@@ -7,6 +7,7 @@ import PostMeal from './PostMeal';
 import GetUserMeals from './GetUserMeals';
 import MealDetail from './MealDetail';
 import Logout from './Logout';
+import NutrData from './NutrData';
 
 const Main = React.createClass({
   render() {
@@ -66,6 +67,8 @@ const Main = React.createClass({
           handleChange={this.props.handleChange}
           mealName={this.props.mealName}
           name={this.props.name}
+          postDate={this.props.postDate}
+          postTime={this.props.postTime}
         />
         <MealDetail
           mealDetail={this.props.mealDetail}
@@ -76,6 +79,13 @@ const Main = React.createClass({
           usersMeals={this.props.usersMeals}
           handleGetAMeal={this.props.handleGetAMeal}
           handleDeleteMeal={this.props.handleDeleteMeal}
+        />
+        <NutrData
+          handleGetAMeal={this.props.handleGetAMeal}
+          handleGetAMealNutr={this.props.handleGetAMealNutr}
+          handleChange={this.props.handleChange}
+          mealId={this.props.mealId}
+          nutrIds={this.props.nutrIds}
         />
       </div>
     )

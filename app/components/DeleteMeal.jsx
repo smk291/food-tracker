@@ -8,7 +8,6 @@ const DeleteMeal = React.createClass({
   render() {
     return (
       <div>
-        <p>Delete meal</p>
         <button
           type="text"
           name="deleteThisMeal"

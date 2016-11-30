@@ -10,6 +10,7 @@
   "scripts": {
     "start": "brunch watch --server",
     "prod": "brunch build --production",
+    "nf": "nf start",
     "knex": "knex"
   },
   "dependencies": {

@@ -23,6 +23,19 @@ const PostMeal = React.createClass({
               onChange={this.props.handleChange.bind(null, 'name')}
             />
 
+            <input
+              type="date"
+              value={this.props.postDate}
+              onChange={this.props.handleChange.bind(null, 'postDate')}
+            />
+
+            <input
+              type="time"
+              value={this.props.postTime}
+              onChange={this.props.handleChange.bind(null, 'postTime')}
+            />
+
+
             <button
               name="login"
               type="text"

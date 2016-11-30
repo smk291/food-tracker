@@ -24,6 +24,49 @@ form label {
   flex: 1 0 auto;
 }
 
+.navigation .invoke {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 5rem;
+}
+
+.side-nav {
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #222;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.side-nav a {
+  padding: 2rem 0 0 5rem;
+  text-decoration: none;
+  font-size: 3rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.side-nav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 4rem;
+}
+
+.show-nav {
+  width: 30rem;
+}
+
 .with-background {
   background-image: url('./Banner.jpg');
   background-size: cover;

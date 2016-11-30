@@ -5,7 +5,7 @@ import SignLog from './SignLog';
 export default class Main extends React.Component {
   render() {
     return (
-      <main>
+      <div>
         <div className="section with-background">
           <div className="container">
             <h3 className="section-heading">Welcome to Food App Tracker!</h3>
@@ -14,12 +14,24 @@ export default class Main extends React.Component {
         </div>
         <div className="section description">
           <div className="container">
-            <h3>Descriptions</h3>
-            <p>Some descriptions</p>
+            <div className="row">
+              <div className="one-third column">
+                <h3>Description 1</h3>
+                <p>Some descriptions</p>
+              </div>
+              <div className="one-third column">
+                <h3>Description 2</h3>
+                <p>Some descriptions</p>
+              </div>
+              <div className="one-third column">
+                <h3>Description 3</h3>
+                <p>Some descriptions</p>
+              </div>
+            </div>
           </div>
         </div>
         <SignLog />
-      </main>
+      </div>
     );
   }
 }

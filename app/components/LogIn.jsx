@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default class LogIn extends React.Component {
   render() {
     return (
-      <main className="section with-second-background">
+      <div className="section with-second-background">
         <h2>Log In</h2>
         <form>
           <div className="container">
@@ -28,7 +28,7 @@ export default class LogIn extends React.Component {
             </div>
           </div>
         </form>
-      </main>
+      </div>
     );
   }
 }

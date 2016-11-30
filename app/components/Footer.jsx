@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
+import LandingFooter from './LandingFooter';
+import ProfileFooter from './ProfileFooter';
 
 export default class Footer extends React.Component {
   render() {
@@ -12,12 +13,7 @@ export default class Footer extends React.Component {
               <p id="copyright">© 2016 F.A.T</p>
             </div>
             <div className="one-third column">
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/logIn">Log In</Link></li>
-                <li><Link to="/signUp">Sign Up</Link></li>
-                <li><a href="https://mikeechen-jquerycalc.surge.sh/">Need a Calculator?</a></li>
-              </ul>
+              {this.props.loggedIn ? <ProfileFooter /> : <LandingFooter />}
             </div>
           </div>
         </div>

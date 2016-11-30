@@ -8,8 +8,8 @@ export default class Header extends React.Component {
           <nav>
             <div className="nav-wrapper">
               <ul className="right">
-                <li><a href="">Sign Up</a></li>
-                <li><a href="">Log In</a></li>
+                <li><a href="">Profile Home</a></li>
+                <li><a href="">Log Out</a></li>
               </ul>
             </div>
           </nav>

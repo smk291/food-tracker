@@ -8,7 +8,7 @@ export default class SignLog extends React.Component {
         <div className="container">
           <h3>Let's get started!</h3>
           <Link className="button button-primary" to="/signUp">Sign Up</Link>
-          <Link className="button button-primary" to="/LogIn">Log In</Link>
+          <Link className="button button-primary" to="/logIn">Log In</Link>
         </div>
       </div>
     );

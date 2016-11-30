@@ -25,7 +25,7 @@ export default class SignUp extends React.Component {
               <div className="row">
                 <div className="twelve columns">
                   <label for="password">Password</label>
-                  <input id="password" className="u-full-width" type="password" />
+                  <input id="password" className="u-full-width" type="password" placeholder="youreawizard"/>
                 </div>
               </div>
               <div>

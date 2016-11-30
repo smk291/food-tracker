@@ -91,14 +91,16 @@ router.get('/users_meals/', authorize, (req, res, next) => {
 });
 
 //Get all of user's user_meals with data
-router.get('/users_meals_data/', authorize, (req, res, next) => {
+router.get('/users_meals_data', authorize, (req, res, next) => {
   const { userId } = req.token;
+  console.log(userId);
   console.log(`Getting individual user_meal`);
 
   knex('users_meals')
     .where('user_id', userId)
     .innerJoin('meals', 'meals.id', 'users_meals.meal_id')
     .then((userMeal) => {
+      console.log(userMeal);
       res.send(userMeal);
     })
     .catch((err) => {

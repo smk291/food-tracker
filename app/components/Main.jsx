@@ -3,6 +3,10 @@ import Login from './Login';
 import Search from './Search';
 import Search_Results from './Search_Results';
 import SignUp from './SignUp';
+import PostMeal from './PostMeal';
+import GetUserMeals from './GetUserMeals';
+import MealDetail from './MealDetail';
+import Logout from './Logout';
 
 const Main = React.createClass({
   render() {
@@ -14,6 +18,9 @@ const Main = React.createClass({
           meal={this.props.meal}
           login={this.props.login}
           handleChange={this.props.handleChange}
+        />
+        <Logout
+          logout={this.props.logout}
         />
         <SignUp
           firstName={this.props.firstName}
@@ -53,6 +60,21 @@ const Main = React.createClass({
             highres={obj.photo.highres}
           />;
         })}
+        <PostMeal
+          meal={this.props.meal}
+          postMeal={this.props.postMeal}
+          body={this.props.body}
+        />
+        <MealDetail
+          mealDetail={this.props.mealDetail}
+          handleUpdateMealDetail={this.props.handleUpdateMealDetail}
+        />
+        <GetUserMeals
+          handleGetUserMeals={this.props.handleGetUserMeals}
+          usersMeals={this.props.usersMeals}
+          handleGetAMeal={this.props.handleGetAMeal}
+          handleDeleteMeal={this.props.handleDeleteMeal}
+        />
       </div>
     )
   }

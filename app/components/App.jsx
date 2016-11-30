@@ -23,10 +23,6 @@ const App = React.createClass({
       signUpPassword: '',
       firstName: '',
       lastName: '',
-      firstName: '',
-      lastName: '',
-      signupEmail: '',
-      signupPassword: '',
       name: '',
       listOfMeals: [],
       usersMeals: [],
@@ -36,6 +32,7 @@ const App = React.createClass({
       postDate: '',
       postTime: '',
       mealToDisplay: {},
+      mealTotalNutr: {},
       nutrIds: {
       	"203": ["g", "Protein"],
       	"204": ["g", "Total lipid (fat)"],
@@ -278,10 +275,8 @@ const App = React.createClass({
     })
     .then(() => {
       const entryName = meal.data.foods.reduce((acc, food, idx, arr) => {
-        console.log(idx);
-        console.log(arr.length);
         if (idx < arr.length - 1){
-          return acc += `${food.food_name} (${food.serving_qty}), `;
+          return acc += `${food.food_name} (${food.serving_qty} ${food.serving_unit}), `;
         } else {
           return acc += `${food.food_name} (${food.serving_qty})`;
         }
@@ -293,20 +288,19 @@ const App = React.createClass({
     });
   },
 
-  postMeal (name, meal) {
+  postMeal (name, meal, date, time) {
     axios({
       method: 'post',
       url: '/meals',
       data: {
         name: name,
         meal: meal,
-        inPlan: false
+        date: date,
+        time: time
       }
     })
     .then((res) => {
       console.log(res);
-      console.log(this.state.postDate);
-      console.log(this.state.postTime);
     })
     .then(() => {
     }).catch((err) => {
@@ -423,11 +417,11 @@ const App = React.createClass({
 
         food.full_nutrients.map((nutr, idx) => {
           foodObj[nutr.attr_id] = [this.state.nutrIds[nutr.attr_id][1], nutr.value, this.state.nutrIds[nutr.attr_id][0]];
-          console.log(foodObj[nutr.attr_id]);
+          // console.log(foodObj[nutr.attr_id]);
         }, []);
 
         mealObj[food.food_name] = foodObj;
-        console.log(mealObj);
+        // console.log(mealObj);
       });
       this.setState({mealToDisplay: mealObj});
     })
@@ -437,6 +431,22 @@ const App = React.createClass({
     .catch((err) => {
       //
     });
+  },
+
+  handleSumMeals() {
+    let sumContainer = {};
+
+    for (let food in this.state.mealToDisplay) {
+      for (let nutr in this.state.mealToDisplay[food]) {
+        if (sumContainer.hasOwnProperty(nutr)){
+          sumContainer[nutr][1] += this.state.mealToDisplay[food][nutr][1]
+        } else {
+          sumContainer[nutr] = this.state.mealToDisplay[food][nutr];
+        }
+      }
+    }
+
+    console.log(sumContainer);
   },
 
 
@@ -473,6 +483,8 @@ const App = React.createClass({
               postDate={this.state.postDate}
               postTime={this.state.postTime}
               mealToDisplay={this.state.mealToDisplay}
+              mealTotalNutr={this.state.MealTotalNutr}
+              handleSumMeals={this.handleSumMeals}
             />
           }/>
         </div>

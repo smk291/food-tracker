@@ -15,11 +15,7 @@ exports.up = (knex) => {
       .inTable('meals')
       .onDelete('CASCADE')
       .index();
-    table.boolean('in_plan')
-      .notNullable();
-    // table.string('intake')
-    //   .notNullable()
-    //   .index();
+    table.boolean('in_plan');
     table.date('date')
       .notNullable()
       .defaultTo(knex.fn.now())
@@ -29,8 +25,6 @@ exports.up = (knex) => {
       .defaultTo(knex.fn.now())
       .index();
     table.timestamps(true, true);
-
-      // Time of meal so as to use entry more than once?
   });
 };
 

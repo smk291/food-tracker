@@ -8,6 +8,8 @@ import GetUserMeals from './GetUserMeals';
 import MealDetail from './MealDetail';
 import Logout from './Logout';
 import NutrData from './NutrData';
+import DisplayMealNutr from './DisplayMealNutr';
+import DisplayTotalMealNutr from './DisplayTotalMealNutr';
 
 const Main = React.createClass({
   render() {
@@ -86,6 +88,14 @@ const Main = React.createClass({
           handleChange={this.props.handleChange}
           mealId={this.props.mealId}
           nutrIds={this.props.nutrIds}
+        />
+        <DisplayMealNutr
+          mealToDisplay={this.props.mealToDisplay}
+        />
+        <DisplayTotalMealNutr
+          mealToDisplay={this.props.mealToDisplay}
+          mealTotalNutr={this.props.mealTotalNutr}
+          handleSumMeals={this.props.handleSumMeals}
         />
       </div>
     )

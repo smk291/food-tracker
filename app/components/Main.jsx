@@ -8,8 +8,8 @@ export default class Main extends React.Component {
       <div>
         <div className="section with-background">
           <div className="container">
-            <h3 className="section-heading">Welcome to Food App Tracker!</h3>
-            <p className="section-description">Your first stop to track calories!</p>
+            <h1 className="section-heading">Welcome to Food App Tracker!</h1>
+            <h4 className="section-description">Your first stop to track calories!</h4>
           </div>
         </div>
         <div className="section description">

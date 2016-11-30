@@ -6,7 +6,7 @@ export default class SignLog extends React.Component {
     return (
       <div className="section with-background">
         <div className="container">
-          <h3>Let's get started!</h3>
+          <h2>Let's get started!</h2>
           <Link className="button button-primary" to="/signUp">Sign Up</Link>
           <Link className="button button-primary" to="/logIn">Log In</Link>
         </div>

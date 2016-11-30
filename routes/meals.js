@@ -29,16 +29,15 @@ const authorize = function(req, res, next) {
 
 //Post meal
 router.post('/meals', authorize, ev(validations.post), (req, res, next) => {
-  const { name, meal, inPlan } = req.body;
+  const { name, meal, date, time } = req.body;
   const { userId } = req.token;
 
   knex('meals')
     .insert(decamelizeKeys({name, meal}), '*')
     .returning('id')
     .then((id) => {
-      console.log(inPlan);
       knex('users_meals')
-        .insert(decamelizeKeys({userId, mealId: id[0], inPlan}), '*')
+        .insert(decamelizeKeys({userId, mealId: id[0], date, time}), '*')
         .then((userMealRow) => {
             res.send(decamelizeKeys(userMealRow));
         });

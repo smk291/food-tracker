@@ -10,7 +10,8 @@ exports.seed = function(knex) {
         user_id: 1,
         meal_id: 1,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -18,7 +19,8 @@ exports.seed = function(knex) {
         user_id: 1,
         meal_id: 2,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -26,7 +28,8 @@ exports.seed = function(knex) {
         user_id: 1,
         meal_id: 3,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -34,7 +37,8 @@ exports.seed = function(knex) {
         user_id: 2,
         meal_id: 4,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -42,7 +46,8 @@ exports.seed = function(knex) {
         user_id: 2,
         meal_id: 5,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -50,7 +55,8 @@ exports.seed = function(knex) {
         user_id: 2,
         meal_id: 6,
         in_plan: false,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }, {
@@ -58,7 +64,8 @@ exports.seed = function(knex) {
         user_id: 2,
         meal_id: 7,
         in_plan: true,
-        // intake: ,
+        date: '2016-06-26',
+        time: '14:26:16 UTC',
         created_at: new Date('2016-06-26 14:26:16 UTC'),
         updated_at: new Date('2016-06-26 14:26:16 UTC')
       }]);

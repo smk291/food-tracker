@@ -9,6 +9,33 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = { loggedIn: false };
+    this.changeState = this.changeState.bind(this);
+  }
+
+  changeState() {
+    const bool = this.state.loggedIn;
+    if (bool) {
+      this.setState({ loggedIn: false });
+    } else {
+      this.setState({ loggedIn: true });
+    }
+  }
+
+  logout () {
+    axios({
+      method: 'delete',
+      url: '/token',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((res) => {
+      console.log('Logged Out!');
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    this.changeState();
   }
 
   componentWillMount() {
@@ -22,10 +49,10 @@ export default class App extends React.Component {
       <BrowserRouter>
         <div className="body">
           <main className="main">
-            {this.state.loggedIn ? <Redirect to="/profile" /> : <MainPage />}
+            {this.state.loggedIn ? <Redirect to="/profile" /> : <MainPage changeState={this.changeState}/>}
             <Match pattern="/profile" component={Profile}/>
           </main>
-          <Footer loggedIn={this.state.loggedIn}/>
+          <Footer loggedIn={this.state.loggedIn} logout={this.logout}/>
         </div>
       </BrowserRouter>
     );

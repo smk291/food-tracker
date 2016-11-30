@@ -3,6 +3,10 @@ import LandingFooter from './LandingFooter';
 import ProfileFooter from './ProfileFooter';
 
 export default class Footer extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <footer className="footer">
@@ -13,7 +17,9 @@ export default class Footer extends React.Component {
               <p id="copyright">© 2016 F.A.T</p>
             </div>
             <div className="one-third column">
-              {this.props.loggedIn ? <ProfileFooter /> : <LandingFooter />}
+              {this.props.loggedIn ?
+                <ProfileFooter logout={this.props.logout}/> :
+                <LandingFooter />}
             </div>
           </div>
         </div>

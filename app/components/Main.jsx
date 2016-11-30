@@ -15,17 +15,29 @@ export default class Main extends React.Component {
         <div className="section description">
           <div className="container">
             <div className="row">
-              <div className="one-third column">
-                <h3>Description 1</h3>
-                <p>Some descriptions</p>
+              <div className="two columns">
+                <h3>10%</h3>
+                <p>L.U.C.K</p>
               </div>
-              <div className="one-third column">
-                <h3>Description 2</h3>
-                <p>Some descriptions</p>
+              <div className="two columns">
+                <h3>20%</h3>
+                <p>S.K.I.L.L</p>
               </div>
-              <div className="one-third column">
-                <h3>Description 3</h3>
-                <p>Some descriptions</p>
+              <div className="two columns">
+                <h3>15%</h3>
+                <p>Concentrated P.O.W.E.R and W.I.L.L</p>
+              </div>
+              <div className="two columns">
+                <h3>5%</h3>
+                <p>P.L.E.A.S.U.R.E</p>
+              </div>
+              <div className="two columns">
+                <h3>50%</h3>
+                <p>P.A.I.N</p>
+              </div>
+              <div className="two columns">
+                <h3>100%</h3>
+                <p>Reason to Remember the N.A.M.E</p>
               </div>
             </div>
           </div>

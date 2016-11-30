@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default class SignUp extends React.Component {
   render() {
@@ -29,6 +30,7 @@ export default class SignUp extends React.Component {
                 </div>
               </div>
               <div>
+                <Link className="button" to="/">Back to Home</Link>
                 <input className="button button-primary" type="submit" placeholder="Submit"/>
               </div>
             </div>

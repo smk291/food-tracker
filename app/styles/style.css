@@ -58,10 +58,10 @@ form label {
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 4rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 4rem;
 }
 
 .with-background {
@@ -138,6 +138,20 @@ form label {
 .item img {
   display: block;
   margin: auto;
+}
+
+.meal-item {
+  margin: 0 2rem 2rem 0;
+  padding: 1rem;
+  height: 10rem;
+  background-color: #222;
+  color: #fff;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.date-display {
+  margin-top: 2rem;
 }
 
 .image-div {

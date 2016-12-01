@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import MealItems from './MealItems';
 
 export default class ReviewMeals extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class ReviewMeals extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let groupByDay = {};
     let sumByDay = {}
     axios({
@@ -42,6 +43,9 @@ export default class ReviewMeals extends React.Component {
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Meal Summary for {this.props.firstName}</h2></center>
+        <MealItems
+          groupByDay={this.state.groupByDay}
+        />
       </div>
     );
   }

@@ -45,7 +45,7 @@ export default class App extends React.Component {
   handleBodyClick() {
     const sideNav = ReactDOM.findDOMNode(this).children[0].children[0].children[1];
 
-    sideNav.classList.remove("show-nav");
+    sideNav.style.width = 0;
   }
 
   componentWillMount() {

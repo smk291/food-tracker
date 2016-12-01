@@ -20,7 +20,7 @@ export default class ProfileHeader extends React.Component {
     return (
       <div ref="sideNav" className="side-nav">
         <a href="" className="close closebtn" onClick={this.navTransition}><i className="close material-icons">close</i></a>
-        <Link onClick={this.navTransition} to="/profile">Profile</Link>
+        <Link onClick={this.navTransition} to="/profile">Profile Home</Link>
         <Link onClick={this.navTransition} to="/search">Search Meals</Link>
         <a href="#">Review Meals</a>
         <a href="#">Analyze</a>

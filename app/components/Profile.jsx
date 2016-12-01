@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Match, Redirect } from 'react-router';
 import ProfileLanding from './ProfileLanding';
 import SearchMeals from './SearchMeals';
+import ReviewMeals from './ReviewMeals';
 
 export default class Profile extends React.Component {
   constructor() {
@@ -28,6 +29,7 @@ export default class Profile extends React.Component {
         <Redirect to="/profile" />
         <Match pattern="/profile" render={() => <ProfileLanding firstName={this.state.firstName}/>} />
         <Match pattern="/search" component={SearchMeals} />
+        <Match pattern="/review" render={() => <ReviewMeals {...this.state}/>} />
       </div>
     );
   }

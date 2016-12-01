@@ -18,7 +18,7 @@ export default class Header extends React.Component {
       e.preventDefault();
     }
 
-    if (closeClass === 'close') {
+    if (!closeClass || closeClass === 'close') {
       sideNav.style.width = 0;
     } else {
       sideNav.style.width = '30rem';

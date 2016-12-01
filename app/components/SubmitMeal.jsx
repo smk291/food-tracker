@@ -13,10 +13,6 @@ export default class SubmitMeal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props.name);
-    console.log({"meal": this.props.mealToPost});
-    console.log(this.props.postDate);
-    console.log(this.props.postTime);
     this.props.postMeal(this.props.name, {"meal": this.props.mealToPost}, this.props.postDate, this.props.postTime);
   }
 

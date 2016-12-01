@@ -19,9 +19,9 @@ export default class Header extends React.Component {
     }
 
     if (closeClass === 'close') {
-      sideNav.classList.remove("show-nav");
+      sideNav.style.width = 0;
     } else {
-      sideNav.classList.toggle("show-nav");
+      sideNav.style.width = '30rem';
     }
   }
 

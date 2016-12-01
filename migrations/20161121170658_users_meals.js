@@ -18,11 +18,9 @@ exports.up = (knex) => {
     table.boolean('in_plan');
     table.date('date')
       .notNullable()
-      .defaultTo(knex.fn.now())
       .index();
     table.time('time')
       .notNullable()
-      .defaultTo(knex.fn.now())
       .index();
     table.timestamps(true, true);
   });

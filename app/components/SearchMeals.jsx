@@ -17,7 +17,7 @@ export default class SearchMeals extends React.Component {
       name: '',
       meal: '',
       postDate: '',
-      postTime: '',
+      postTime: ''
     }
   }
 
@@ -47,7 +47,6 @@ export default class SearchMeals extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
       meal = res;
       this.setState({meal: [res]});
       console.log(res.data.foods);
@@ -105,7 +104,11 @@ export default class SearchMeals extends React.Component {
     })
     .then(() => {
     }).catch((err) => {
-      notify.show(err.response.data, 'error', 3000);
+      const errArr = err.response.data.errors.map(elm => {
+        return elm.messages[0];
+      });
+      const errString = errArr.join(', ');
+      notify.show(errString, 'error', 3000);
     });
   }
 
@@ -124,6 +127,9 @@ export default class SearchMeals extends React.Component {
         { this.state.name.length > 0 ? (
           <SubmitMeal
             name={this.state.name}
+            mealToPost={this.state.mealToPost}
+            postDate={this.state.postDate}
+            postTime={this.state.postTime}
             handleChange={this.handleChange}
             postMeal={this.postMeal}
           />) : null }

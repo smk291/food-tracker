@@ -40,7 +40,7 @@ form label {
   top: 0;
   left: 0;
   background-color: #222;
-  overflow-x: hidden;
+  overflow: hidden;
   transition: 0.5s;
 }
 
@@ -53,7 +53,7 @@ form label {
   transition: 0.3s;
 }
 
-.side-nav a:hover {
+.side-nav a:hover, .offcanvas a:focus{
   color: #f1f1f1;
 }
 
@@ -62,10 +62,6 @@ form label {
     top: 0;
     right: 0;
     font-size: 4rem;
-}
-
-.show-nav {
-  width: 30rem;
 }
 
 .with-background {

@@ -11,5 +11,14 @@ module.exports.post = {
     meal: joi.object()
       .label('meal')
       .required(),
+
+    date: joi.date()
+      .iso()
+      .label('date')
+      .required(),
+
+    time: joi.string()
+      .label('time')
+      .required(),
   }
 };

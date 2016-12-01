@@ -12,9 +12,7 @@ module.exports.post = {
       .label('meal')
       .required(),
 
-    date: joi.date()
-      .iso()
-      .label('date')
+    date: joi.label('date')
       .required(),
 
     time: joi.string()

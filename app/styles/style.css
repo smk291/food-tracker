@@ -130,9 +130,14 @@ form label {
 .item {
   margin: 0 2rem 2rem 0;
   padding: 1rem;
-  height: 45rem;
+  height: 65rem;
   background-color: #fff;
   border: solid 0.1rem #222;
+}
+
+.item p {
+  margin: 0px;
+  padding: 0px;
 }
 
 .item img {
@@ -164,6 +169,23 @@ form label {
 
 .meal-form input {
   margin: 0 1rem 1rem 0;
+  text-align: center;
+}
+
+.mealName {
+  width: 100%;
+}
+
+.recalculate, .delete {
+  display: inline;
+  width: 45%;
+
+}
+
+.recalculate {
+  margin: 0px;
+  margin-right: 10%;
+  padding: 0px;
 }
 
 #app {

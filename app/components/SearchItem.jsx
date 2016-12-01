@@ -13,7 +13,6 @@ export default class SearchItem extends React.Component {
 
   handleChange(e) {
     var change = {};
-    console.log(this.state.qty);
     change[e.target.name] = e.target.value;
     this.setState(change);
   }
@@ -34,11 +33,36 @@ export default class SearchItem extends React.Component {
           <img src={this.props.thumb}/>
         </div>
         <h4>{this.props.foodItem}</h4>
-        <p>Calories: {this.props.calories}kcal</p>
+        <table class="u-full-width">
+          <tbody>
+            <tr>
+              <td>Calories:</td>
+              <td>{this.props.calories}kcal</td>
+            </tr>
+            <tr>
+              <td>Protein:</td>
+              <td>{this.props.protein}g</td>
+            </tr>
+            <tr>
+              <td>Fat:</td>
+              <td>{this.props.totalFat}g</td>
+            </tr>
+            <tr>
+              <td>Carbohydrates:</td>
+              <td>{this.props.totalCarb}g</td>
+            </tr>
+            <tr>
+              <td>Serving:</td>
+              <td>{this.props.serving_qty} {this.props.serving_unit}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* <p>Calories: {this.props.calories}kcal</p>
         <p>Protein: {this.props.protein}g</p>
         <p>Fat: {this.props.totalFat}g</p>
         <p>Carbohydrate: {this.props.totalCarb}g</p>
-        <p>Serving: {this.props.serving_qty} {this.props.serving_unit}</p>
+        <p>Serving: {this.props.serving_qty} {this.props.serving_unit}</p> */}
         <p>
           Change quantity:
           <input
@@ -48,18 +72,19 @@ export default class SearchItem extends React.Component {
             onChange={this.handleChange}
           />
           <button
+            className="recalculate"
             type="text"
             onClick={this.recalculate}
-            min="1"
           >
             Recalculate
           </button>
 
           <button
+            className="delete"
             type="text"
             onClick={this.deleteItem}
           >
-            Delete This Item from Meal
+            Remove
           </button>
 
         </p>

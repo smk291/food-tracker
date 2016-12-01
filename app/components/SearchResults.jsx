@@ -40,19 +40,15 @@ export default class SearchResults extends React.Component {
 
     console.log(this.props.name);
     const mealName = recalcMeal[0].data.foods.reduce((acc, food, i, arr) => {
-      return acc += `${recalcMeal[0].data.foods[i].food_name} (${recalcMeal[0].data.foods[i].serving_qty} ${recalcMeal[0].data.foods[i].serving_unit}),`
-
-      // if (i < this.props.mealToPost.length - 1) {
-      //   return acc += `${this.props.mealToPost[i].food_name} (${this.props.mealToPost[i].serving_qty} ${this.props.mealToPost[i].serving_unit}), `;
-      //   console.log(`${this.props.mealToPost[i].food_name} (${this.props.mealToPost[i].serving_qty} ${this.props.mealToPost[i].serving_unit}), `);
-      // } else {
-      //   return acc += `${this.props.mealToPost[i].food_name} (${this.props.mealToPost[i].serving_qty}  ${this.props.mealToPost[i].serving_unit})`;
-      //   console.log(`${this.props.mealToPost[i].food_name} (${this.props.mealToPost[i].serving_qty}  ${this.props.mealToPost[i].serving_unit})`);
-      // }
+      if (idx < arr.length - 1) {
+        return acc += `${food.food_name} (${food.serving_qty} ${food.serving_unit}), `;
+      } else {
+        return acc += `${food.food_name} (${food.serving_qty}  ${food.serving_unit})`;
+      }
     }, ``);
 
     console.log(mealName);
-    this.setState({name: mealName})
+    this.props.setName(mealName)
   }
 
   deleteItem(idx) {
@@ -65,7 +61,7 @@ export default class SearchResults extends React.Component {
 
     this.setState({meal: updateMeal});
 
-    const mealName = this.props.mealToPost.reduce((acc, food, idx, arr) => {
+    const mealName = recalcMeal[0].data.foods.reduce((acc, food, i, arr) => {
       if (idx < arr.length - 1) {
         return acc += `${food.food_name} (${food.serving_qty} ${food.serving_unit}), `;
       } else {
@@ -73,8 +69,7 @@ export default class SearchResults extends React.Component {
       }
     }, ``);
 
-    console.log(mealName);
-    this.setState({name: mealName})
+    this.props.setName(mealName)
   }
 
   render() {

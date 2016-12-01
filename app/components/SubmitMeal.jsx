@@ -21,14 +21,13 @@ export default class SubmitMeal extends React.Component {
       <div className="container meal-form">
         <form id="postMeal" onSubmit={this.handleSubmit}>
           <input
-            className=""
+            className="mealName"
             placeholder="name"
             id="name"
             type="text"
             value={this.props.name}
             name="name"
             onChange={this.handleChange}
-            disabled
           />
           <input
             type="date"

@@ -11,6 +11,7 @@ export default class SearchMeals extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.searchForMeal = this.searchForMeal.bind(this);
     this.postMeal = this.postMeal.bind(this);
+    this.setName = this.setName.bind(this);
     this.state = {
       searchString: '',
       mealToPost: [],
@@ -19,6 +20,10 @@ export default class SearchMeals extends React.Component {
       postDate: '',
       postTime: ''
     }
+  }
+
+  setName(name) {
+    this.setState({name: name});
   }
 
   handleChange(e) {
@@ -113,6 +118,7 @@ export default class SearchMeals extends React.Component {
   }
 
   render() {
+    console.log(this.state.name);
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Search for your Meal!</h2></center>
@@ -125,6 +131,7 @@ export default class SearchMeals extends React.Component {
           meal={this.state.meal}
           name={this.state.name}
           mealToPost={this.state.mealToPost}
+          setName={this.setName}
         />
         { this.state.name.length > 0 ? (
           <SubmitMeal

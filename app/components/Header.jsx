@@ -13,7 +13,7 @@ export default class Header extends React.Component {
   navTransition(e) {
     e.preventDefault();
     const sideNav = ReactDOM.findDOMNode(this.refs.sideNav);
-    if (e.target.value === 'close') {
+    if (e.target.classList[0] === 'close') {
       sideNav.classList.remove("show-nav");
     } else {
       sideNav.classList.toggle("show-nav");

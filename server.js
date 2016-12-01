@@ -31,13 +31,13 @@ switch (app.get('env')) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // CSRF protection
-// app.use((req, res, next) => {
-//   if (/json/.test(req.get('Accept'))) {
-//     return next();
-//   }
-//
-//   res.sendStatus(406);
-// });
+app.use((req, res, next) => {
+  if (/json/.test(req.get('Accept'))) {
+    return next();
+  }
+
+  res.sendStatus(406);
+});
 
 //routes start here
 const users = require('./routes/users');
@@ -55,10 +55,7 @@ app.use(users_meals);
 app.use(metrics);
 //routes end here
 
-app.use((_req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
+// eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
   if (err.output && err.output.statusCode) {
     return res
@@ -67,7 +64,17 @@ app.use((err, _req, res, _next) => {
       .send(err.message);
   }
 
-  //esling-disable-next-line no-console
+  // eslint-disable-next-line no-console
+  console.error(JSON.stringify(err, null, 2));
+
+  if (err.status) {
+    return res
+    .status(err.status)
+    .set('Content-Type', 'text/plain')
+    .send(err.statusText);
+  }
+
+  // eslint-disable-next-line no-console
   console.error(err.stack);
   res.sendStatus(500);
 });

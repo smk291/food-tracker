@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 export default class LandingHeader extends React.Component {
   constructor(props) {
     super(props);
+    this.navTransition = this.navTransition.bind(this);
   }
 
   navTransition(e) {
@@ -14,10 +15,10 @@ export default class LandingHeader extends React.Component {
   render() {
     return (
       <div ref="sideNav" className="side-nav">
-        <a href="" className="closebtn" onClick={this.navTransition.bind(this)}><i className="material-icons">close</i></a>
-        <Link to="/">Home</Link>
-        <Link to="signUp">Sign Up</Link>
-        <Link to="logIn">Log In</Link>
+        <a href="" className="close closebtn" onClick={this.navTransition}><i className="close material-icons">close</i></a>
+        <Link onClick={this.navTransition} to="/">Home</Link>
+        <Link onClick={this.navTransition} to="signUp">Sign Up</Link>
+        <Link onClick={this.navTransition} to="logIn">Log In</Link>
       </div>
     );
   }

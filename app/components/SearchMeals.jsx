@@ -3,12 +3,14 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import SubmitMeal from './SubmitMeal';
+import notify from 'react-notify-toast';
 
 export default class SearchMeals extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.searchForMeal = this.searchForMeal.bind(this);
+    this.postMeal = this.postMeal.bind(this);
     this.state = {
       searchString: '',
       mealToPost: [],
@@ -75,7 +77,7 @@ export default class SearchMeals extends React.Component {
 
       this.setState({name: mealName})
     }).catch((err) => {
-      console.log(err);
+      notify.show(err.response.data, 'error', 3000);
     });
   }
 
@@ -91,11 +93,19 @@ export default class SearchMeals extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
+      this.setState({
+        searchString: '',
+        mealToPost: [],
+        name: '',
+        meal: '',
+        postDate: '',
+        postTime: ''
+      })
+      notify.show('Meal Saved!', 'success', 3000);
     })
     .then(() => {
     }).catch((err) => {
-      console.log(err);
+      notify.show(err.response.data, 'error', 3000);
     });
   }
 

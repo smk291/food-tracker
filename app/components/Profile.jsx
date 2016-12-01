@@ -27,7 +27,7 @@ export default class Profile extends React.Component {
       <div>
         <Redirect to="/profile" />
         <Match pattern="/profile" render={() => <ProfileLanding firstName={this.state.firstName}/>} />
-        <Match pattern="/search" render={() => <SearchMeals />} />;
+        <Match pattern="/search" component={SearchMeals} />
       </div>
     );
   }

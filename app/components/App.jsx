@@ -4,6 +4,7 @@ import MainPage from './MainPage';
 import Profile from './Profile';
 import Header from './Header';
 import Footer from './Footer';
+import Notifications, { notify } from 'react-notify-toast';
 import { BrowserRouter, Match, Redirect } from 'react-router';
 
 export default class App extends React.Component {
@@ -11,6 +12,7 @@ export default class App extends React.Component {
     super();
     this.state = { loggedIn: false };
     this.changeState = this.changeState.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   changeState() {
@@ -32,17 +34,18 @@ export default class App extends React.Component {
     })
     .then((res) => {
       console.log('Logged Out!');
+      notify.show('Logged Out!', 'success', 3000);
     })
-    .catch((err) => {
-      console.error(err);
-    })
+    .catch(err => {
+      notify.show(err.response.data, 'error', 3000);
+    });
     this.changeState();
   }
 
   componentWillMount() {
     axios.get('/token')
       .then((res) => this.setState({ loggedIn: res.data }))
-      .catch((err) => console.error(err.message));
+      .catch(err => notify.show(err.response.data, 'error', 3000));
   }
 
   render() {
@@ -51,6 +54,7 @@ export default class App extends React.Component {
         <div className="body">
           <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
           <main className="main">
+            <Notifications />
             {this.state.loggedIn ? <Profile /> : <MainPage changeState={this.changeState}/>}
           </main>
           <Footer loggedIn={this.state.loggedIn} logout={this.logout}/>

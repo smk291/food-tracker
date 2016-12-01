@@ -4,6 +4,7 @@ import Main from './Main';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
 import { Match } from 'react-router';
+import { notify } from 'react-notify-toast';
 
 export default class MainPage extends React.Component {
   constructor() {
@@ -38,9 +39,10 @@ export default class MainPage extends React.Component {
         password: ''
       });
       this.props.changeState();
+      notify.show('Logged In!', 'success', 3000);
     })
     .catch((err) => {
-      console.error(err);
+      notify.show(err.response.data, 'error', 3000);
     });
   }
 

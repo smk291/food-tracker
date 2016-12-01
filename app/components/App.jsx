@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import MainPage from './MainPage';
 import Profile from './Profile';
+import Header from './Header';
 import Footer from './Footer';
 import { BrowserRouter, Match, Redirect } from 'react-router';
 
@@ -48,9 +49,9 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="body">
+          <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
           <main className="main">
-            {this.state.loggedIn ? <Redirect to="/profile" /> : <MainPage changeState={this.changeState}/>}
-            <Match pattern="/profile" component={Profile}/>
+            {this.state.loggedIn ? <Profile /> : <MainPage changeState={this.changeState}/>}
           </main>
           <Footer loggedIn={this.state.loggedIn} logout={this.logout}/>
         </div>

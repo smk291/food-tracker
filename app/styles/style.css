@@ -29,6 +29,7 @@ form label {
   top: 0;
   left: 0;
   font-size: 5rem;
+  color: #000;
 }
 
 .side-nav {
@@ -75,7 +76,7 @@ form label {
 .with-second-background {
   background-image: url('./SecondBanner.jpg');
   background-size: cover;
-  height: 50vh;
+  min-height: 50vh;
 }
 
 .section {
@@ -105,6 +106,10 @@ form label {
   margin-bottom: 1.2rem;
 }
 
+.section-search {
+  padding: 1rem 0 0;
+}
+
 .button {
   margin: 2rem;
 }
@@ -117,6 +122,40 @@ form label {
   list-style: none;
 }
 
+.heading {
+  margin-top: 2rem;
+}
+
+.items {
+  display: block;
+  margin-top: 2rem;
+}
+
+.item {
+  margin: 0 2rem 2rem 0;
+  padding: 1rem;
+  height: 45rem;
+  background-color: #fff;
+  border: solid 0.1rem #222;
+}
+
+.item img {
+  display: block;
+  margin: auto;
+}
+
+.image-div {
+  height: 15rem;
+}
+
+.meal-form {
+  width: 100%;
+}
+
+.meal-form input {
+  margin: 0 1rem 1rem 0;
+}
+
 #app {
   display: flex;
   min-height: 100vh;
@@ -126,4 +165,12 @@ form label {
 #copyright {
   position: absolute;
   margin-bottom: 0;
+}
+
+#searchTitle {
+  text-align: left;
+}
+
+#searchButt {
+  margin-top: 0;
 }

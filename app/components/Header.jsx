@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
+import LandingHeader from './LandingHeader';
+import ProfileHeader from './ProfileHeader';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -11,8 +13,8 @@ export default class Header extends React.Component {
   navTransition(e) {
     e.preventDefault();
     const sideNav = ReactDOM.findDOMNode(this.refs.sideNav);
-    if (e.value === 'close') {
-      sideNav.classList.remove("show-nev");
+    if (e.target.value === 'close') {
+      sideNav.classList.remove("show-nav");
     } else {
       sideNav.classList.toggle("show-nav");
     }
@@ -23,14 +25,9 @@ export default class Header extends React.Component {
       <header>
           <nav className="navigation">
             <a href="" onClick={this.navTransition}><i className="material-icons invoke">menu</i></a>
-            <div ref="sideNav" className="side-nav">
-              <a href="" className="closebtn" onClick={this.navTransition}><i className="material-icons">close</i></a>
-              <a href="#">Profile</a>
-              <a href="#">Search Meals</a>
-              <a href="#">Review Meals</a>
-              <a href="#">Analyze</a>
-              <a href="#">Log Out</a>
-            </div>
+            {this.props.loggedIn ?
+              <ProfileHeader logout={this.props.logout} navTrans={this.navTransition} ref="sideNav"/> :
+              <LandingHeader navTrans={this.navTransition} ref="sideNav"/>}
           </nav>
       </header>
     );

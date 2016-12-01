@@ -3,9 +3,8 @@ import React from 'react';
 const PostMeal = React.createClass({
   postMeal(e) {
     e.preventDefault();
-    console.log(this.props.meal);
-    console.log(this.props.name);
-    this.props.postMeal(this.props.name, this.props.meal[0], this.props.postDate, this.props.time);
+
+    this.props.postMeal(this.props.name, {"meal": this.props.mealToPost}, this.props.postDate, this.props.postTime);
   },
 
   render() {

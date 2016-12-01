@@ -11,7 +11,8 @@ import NutrData from './NutrData';
 import DisplayMealNutr from './DisplayMealNutr';
 import DisplayTotalMealNutr from './DisplayTotalMealNutr';
 import GetMealsAndSort from './GetMealsAndSort';
-
+import SumMeals from './SumMeals';
+import SumOfDay from './SumOfDay';
 const Main = React.createClass({
   render() {
     return (
@@ -23,9 +24,9 @@ const Main = React.createClass({
           login={this.props.login}
           handleChange={this.props.handleChange}
         />
-        <Logout
+        {/* <Logout
           logout={this.props.logout}
-        />
+        /> */}
         <SignUp
           firstName={this.props.firstName}
           lastName={this.props.lastName}
@@ -40,31 +41,33 @@ const Main = React.createClass({
           handleChange={this.props.handleChange}
         />
         {this.props.meal.length > 0 && this.props.meal[0].data.foods.map((obj, idx) => {
+          // console.log(obj);
           return <Search_Results
             key={idx}
             meal={obj.food_name}
-            ndb_no={obj.ndb_no}
+            // ndb_no={obj.ndb_no}
             nf_calories={obj.nf_}
-            serving_qty={obj.serving_qty}
-            serving_unit={obj.serving_unit}
-            serving_weight_grams={obj.serving_weight_grams}
+            // serving_qty={obj.serving_qty}
+            // serving_unit={obj.serving_unit}
+            // serving_weight_grams={obj.serving_weight_grams}
             nf_calories={obj.nf_calories}
             nf_total_fat={obj.nf_total_fat}
-            nf_saturated_fat={obj.nf_saturated_fat}
-            nf_cholesterol={obj.nf_cholesterol}
-            nf_sodium={obj.nf_sodium}
+            // nf_saturated_fat={obj.nf_saturated_fat}
+            // nf_cholesterol={obj.nf_cholesterol}
+            // nf_sodium={obj.nf_sodium}
             nf_total_carbohydrate={obj.nf_total_carbohydrate}
-            nf_dietary_fiber={obj.nf_dietary_fiber}
-            nf_sugars={obj.nf_sugars}
+            // nf_dietary_fiber={obj.nf_dietary_fiber}
+            // nf_sugars={obj.nf_sugars}
             nf_protein={obj.nf_protein}
-            nf_potassium={obj.nf_potassium}
-            nf_p={obj.nf_p}
+            // nf_potassium={obj.nf_potassium}
+            // nf_p={obj.nf_p}
             thumb={obj.photo.thumb}
-            highres={obj.photo.highres}
+            // highres={obj.photo.highres}
           />;
         })}
         <PostMeal
           meal={this.props.meal}
+          mealToPost={this.props.mealToPost}
           postMeal={this.props.postMeal}
           handleChange={this.props.handleChange}
           mealName={this.props.mealName}
@@ -72,7 +75,12 @@ const Main = React.createClass({
           postDate={this.props.postDate}
           postTime={this.props.postTime}
         />
-        {/* <MealDetail
+        <SumMeals
+          mealId={this.props.mealId}
+          handleChange={this.props.handleChange}
+          sumMealsInput={this.props.sumMealsInput}
+        />
+        <MealDetail
           mealDetail={this.props.mealDetail}
           handleUpdateMealDetail={this.props.handleUpdateMealDetail}
         />
@@ -89,9 +97,9 @@ const Main = React.createClass({
           mealId={this.props.mealId}
           nutrIds={this.props.nutrIds}
         />
-        <DisplayMealNutr
+        {/* <DisplayMealNutr
           mealToDisplay={this.props.mealToDisplay}
-        />
+        /> */}
         <DisplayTotalMealNutr
           mealToDisplay={this.props.mealToDisplay}
           mealTotalNutr={this.props.mealTotalNutr}
@@ -99,7 +107,13 @@ const Main = React.createClass({
         />
         <GetMealsAndSort
           handleGetUserMealsDateSort={this.props.handleGetUserMealsDateSort}
-        /> */}
+        />
+        <SumOfDay
+          groupByDay={this.props.groupByDay}
+          sumOfDay={this.props.sumOfDay}
+          dayToSum={this.props.dayToSum}
+          handleChange={this.props.handleChange}
+        />
       </div>
     )
   }

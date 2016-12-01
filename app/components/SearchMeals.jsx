@@ -123,6 +123,8 @@ export default class SearchMeals extends React.Component {
         />
         <SearchResults
           meal={this.state.meal}
+          name={this.state.name}
+          mealToPost={this.state.mealToPost}
         />
         { this.state.name.length > 0 ? (
           <SubmitMeal

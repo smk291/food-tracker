@@ -20,7 +20,7 @@ export default class ProfileLanding extends React.Component {
                 <Link to="/search" className="button">Search Meals</Link>
               </div>
               <div className="one-third column">
-                <a className="button">Review My Meals</a>
+                <Link to="/review" className="button">Review My Meals</Link>
               </div>
               <div className="one-third column">
                 <a className="button">Analyze My Meals</a>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import SubmitMeal from './SubmitMeal';
-import notify from 'react-notify-toast';
+import { notify } from 'react-notify-toast';
 
 export default class SearchMeals extends React.Component {
   constructor() {
@@ -77,7 +77,7 @@ export default class SearchMeals extends React.Component {
 
       this.setState({name: mealName})
     }).catch((err) => {
-      notify.show(err.response.data, 'error', 3000);
+      notify.show(err.response.data.message, 'error', 3000);
     });
   }
 

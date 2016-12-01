@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import MainPage from './MainPage';
 import Profile from './Profile';
@@ -8,8 +9,8 @@ import Notifications, { notify } from 'react-notify-toast';
 import { BrowserRouter, Match, Redirect } from 'react-router';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { loggedIn: false };
     this.changeState = this.changeState.bind(this);
     this.logout = this.logout.bind(this);
@@ -33,13 +34,18 @@ export default class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log('Logged Out!');
       notify.show('Logged Out!', 'success', 3000);
     })
     .catch(err => {
       notify.show(err.response.data, 'error', 3000);
     });
     this.changeState();
+  }
+
+  handleBodyClick() {
+    const sideNav = ReactDOM.findDOMNode(this).children[0].children[0].children[1];
+
+    sideNav.classList.remove("show-nav");
   }
 
   componentWillMount() {
@@ -52,8 +58,8 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="body">
-          <Header loggedIn={this.state.loggedIn} logout={this.logout}/>
-          <main className="main">
+          <Header loggedIn={this.state.loggedIn} logout={this.logout} />
+          <main className="main" ref="main" onClick={this.handleBodyClick.bind(this)}>
             <Notifications />
             {this.state.loggedIn ? <Profile /> : <MainPage changeState={this.changeState}/>}
           </main>

@@ -11,9 +11,14 @@ export default class Header extends React.Component {
   }
 
   navTransition(e) {
-    e.preventDefault();
     const sideNav = ReactDOM.findDOMNode(this.refs.sideNav);
-    if (e.target.classList[0] === 'close') {
+    const closeClass = e.target.classList[0];
+
+    if (closeClass) {
+      e.preventDefault();
+    }
+
+    if (closeClass === 'close') {
       sideNav.classList.remove("show-nav");
     } else {
       sideNav.classList.toggle("show-nav");
@@ -24,7 +29,7 @@ export default class Header extends React.Component {
     return (
       <header>
           <nav className="navigation">
-            <a href="" onClick={this.navTransition}><i className="material-icons invoke">menu</i></a>
+            <a href="" onClick={this.navTransition.bind(this)}><i className="material-icons invoke">menu</i></a>
             {this.props.loggedIn ?
               <ProfileHeader logout={this.props.logout} navTrans={this.navTransition} ref="sideNav"/> :
               <LandingHeader navTrans={this.navTransition} ref="sideNav"/>}

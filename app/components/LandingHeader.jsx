@@ -14,7 +14,7 @@ export default class LandingHeader extends React.Component {
 
   render() {
     return (
-      <div ref="sideNav" className="side-nav">
+      <div className="side-nav">
         <a href="" className="close closebtn" onClick={this.navTransition}><i className="close material-icons">close</i></a>
         <Link onClick={this.navTransition} to="/">Home</Link>
         <Link onClick={this.navTransition} to="signUp">Sign Up</Link>

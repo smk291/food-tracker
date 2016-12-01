@@ -55,7 +55,7 @@ const App = React.createClass({
       	"257": ["g", "Adjusted Protein"],
       	"262": ["mg", "Caffeine"],
       	"263": ["mg", "Theobromine"],
-      	"268": ["kJ", "Energy"],
+      	"268": ["kJ", "Energy (kJ)"],
       	"269": ["g", "Sugars, total"],
       	"287": ["g", "Galactose"],
       	"291": ["g", "Fiber, total dietary"],
@@ -318,7 +318,6 @@ const App = React.createClass({
       }
     })
     .then((res) => {
-      // console.log(res);
       console.log(res);
     })
     .then(() => {
@@ -536,21 +535,27 @@ const App = React.createClass({
     // console.log(this.state.groupByDay);
     // console.log(this.state.groupByDay[day]);
     let sumContainer = {};
+    let nutrContainer = {};
     const mealToSum = this.state.groupByDay[day];
 
     for (let i = 0; i < mealToSum.length; i++) {
       // console.log(mealToSum[i]);
       for (let j = 0; j < mealToSum[i].length; j++){
-        // console.log(mealToSum[i][j]);
+        console.log(mealToSum[i][j]);
+        console.log(JSON.stringify(mealToSum[i][j]));
         for (let k = 0; k < mealToSum[i][j].full_nutrients.length; k++){
           // console.log(mealToSum[i][j].full_nutrients[k]);
           let nutrNameFromAttrId = this.state.nutrIds[mealToSum[i][j].full_nutrients[k].attr_id][1];
-          console.log(nutrNameFromAttrId);
+          // console.log(nutrNameFromAttrId);
 
           if (sumContainer.hasOwnProperty(nutrNameFromAttrId)){
+            // console.log(sumContainer[nutrNameFromAttrId][0], mealToSum[i][j].full_nutrients[k].value);
             sumContainer[nutrNameFromAttrId][0] += mealToSum[i][j].full_nutrients[k].value;
+            nutrContainer[nutrNameFromAttrId][0].push(mealToSum[i][j].full_nutrients[k].value);
           } else {
-            sumContainer[nutrNameFromAttrId] = [mealToSum[i].full_nutrients[j].value, this.state.nutrIds[mealToSum[i].full_nutrients[j].attr_id][0]];
+            sumContainer[nutrNameFromAttrId] = [mealToSum[i][j].full_nutrients[k].value, this.state.nutrIds[mealToSum[i][j].full_nutrients[k].attr_id][0]];
+            nutrContainer[nutrNameFromAttrId] = [[mealToSum[i][j].full_nutrients[k].value], this.state.nutrIds[mealToSum[i][j].full_nutrients[k].attr_id][0]];
+            // console.log(sumContainer[nutrNameFromAttrId], mealToSum[i][j].full_nutrients[k].value, this.state.nutrIds[mealToSum[i][j].full_nutrients[k].attr_id][0]);
           }
         }
       }
@@ -560,7 +565,8 @@ const App = React.createClass({
     //     }
     //   }
     }
-    // console.log(sumContainer);
+    console.log(sumContainer);
+    console.log(nutrContainer);
   },
 
     // 2016-11-28T08:00:00.000Z

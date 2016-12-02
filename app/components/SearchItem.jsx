@@ -33,7 +33,7 @@ export default class SearchItem extends React.Component {
           <img src={this.props.thumb}/>
         </div>
         <h4>{this.props.foodItem}</h4>
-        <table class="u-full-width">
+        <table className="u-full-width">
           <tbody>
             <tr>
               <td>Calories:</td>
@@ -58,11 +58,6 @@ export default class SearchItem extends React.Component {
           </tbody>
         </table>
 
-        {/* <p>Calories: {this.props.calories}kcal</p>
-        <p>Protein: {this.props.protein}g</p>
-        <p>Fat: {this.props.totalFat}g</p>
-        <p>Carbohydrate: {this.props.totalCarb}g</p>
-        <p>Serving: {this.props.serving_qty} {this.props.serving_unit}</p> */}
         <p>
           Change quantity:
           <input
@@ -71,6 +66,8 @@ export default class SearchItem extends React.Component {
             name="qty"
             onChange={this.handleChange}
           />
+        </p>
+        
           <button
             className="recalculate"
             type="text"
@@ -87,7 +84,6 @@ export default class SearchItem extends React.Component {
             Remove
           </button>
 
-        </p>
       </div>
     );
   }

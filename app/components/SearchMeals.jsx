@@ -54,7 +54,7 @@ export default class SearchMeals extends React.Component {
     .then((res) => {
       meal = res;
       this.setState({meal: [res]});
-      console.log(res.data.foods);
+
       for (let i = 0; i < res.data.foods.length; i++) {
         let tempObj = {};
         tempObj.food_name = res.data.foods[i].food_name;
@@ -70,7 +70,6 @@ export default class SearchMeals extends React.Component {
       this.setState({mealToPost})
     })
     .then(() => {
-      console.log(this.state.mealToPost);
       const mealName = mealToPost.reduce((acc, food, idx, arr) => {
         if (idx < arr.length - 1) {
           return acc += `${food.food_name} (${food.serving_qty} ${food.serving_unit}), `;
@@ -118,7 +117,6 @@ export default class SearchMeals extends React.Component {
   }
 
   render() {
-    console.log(this.state.name);
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Search for your Meal!</h2></center>
@@ -132,6 +130,7 @@ export default class SearchMeals extends React.Component {
           name={this.state.name}
           mealToPost={this.state.mealToPost}
           setName={this.setName}
+          nutrIds={this.props.nutrIds}
         />
         { this.state.name.length > 0 ? (
           <SubmitMeal

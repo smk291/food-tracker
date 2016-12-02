@@ -7,8 +7,8 @@ import { notify } from 'react-notify-toast';
 import { Link } from 'react-router';
 
 export default class SearchMeals extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.searchForMeal = this.searchForMeal.bind(this);
     this.postMeal = this.postMeal.bind(this);
@@ -47,7 +47,8 @@ export default class SearchMeals extends React.Component {
       Maltose: '',
       Starch: '',
       Sucrose: ''
-    }
+    };
+    this.sumNutr = this.sumNutr.bind(this);
   }
 
   setName(name) {
@@ -131,8 +132,8 @@ export default class SearchMeals extends React.Component {
     })
     .then(() => {
 
-      if (this.state.nutrs['Energy'] > 0) {
-        this.setState({Energy: <tr><td>Energy</td><td>{this.state.nutrs['Energy']}</td></tr>})
+      if (this.state.nutrs['Calories'] > 0) {
+        this.setState({Calories: <tr><td>Calories</td><td>{this.state.nutrs['Calories']}</td></tr>})
       }
 
       if (this.state.nutrs['Energy (kJ)'] > 0) {
@@ -248,7 +249,8 @@ export default class SearchMeals extends React.Component {
         meal: '',
         postDate: '',
         postTime: ''
-      })
+      });
+      this.props.resetState();
       notify.show('Meal Saved!', 'success', 3000);
     })
     .then(() => {
@@ -262,7 +264,23 @@ export default class SearchMeals extends React.Component {
   }
 
   sumNutr() {
+    const meal = this.state.mealToPost;
+    let nutrs = {};
 
+    for (let j = 0; j < meal.length; j++){
+      for (let k = 0; k < meal[j].full_nutrients.length; k++){
+        let nutrNameFromAttrId = this.props.nutrIds[meal[j].full_nutrients[k].attr_id][1];
+
+        if (nutrs.hasOwnProperty(nutrNameFromAttrId)){
+          nutrs[nutrNameFromAttrId][0] += meal[j].full_nutrients[k].value;
+        } else {
+          nutrs[nutrNameFromAttrId] = [meal[j].full_nutrients[k].value, this.props.nutrIds[meal[j].full_nutrients[k].attr_id][0]];
+        }
+      }
+    }
+
+    console.log(nutrs);
+    this.setState({nutrs})
   }
 
   render() {
@@ -275,6 +293,7 @@ export default class SearchMeals extends React.Component {
           searchForMeal={this.searchForMeal}
         />
         <SearchResults
+          sumNutr={this.sumNutr}
           meal={this.state.meal}
           name={this.state.name}
           mealToPost={this.state.mealToPost}

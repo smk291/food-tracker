@@ -202,7 +202,42 @@ export default class Profile extends React.Component {
         "N/A 4": ["Molybdenum", 75],
         "N/A 5": ["Chloride", 3400]
       }
-    }
+    };
+    this.resetState = this.resetState.bind(this);
+  }
+
+  resetState() {
+    let groupByDay = {};
+    let sumByDay = {}
+    axios({
+      method: 'get',
+      url: '/users_meals_data'
+    })
+    .then((res) => {
+      this.setState({usersMeals: res.data});
+    })
+    .then(() => {
+      this.state.usersMeals.reduce((acc, meal, idx) => {
+        if (groupByDay.hasOwnProperty(meal.date)){
+          groupByDay[meal.date].push(meal.meal.meal);
+        } else {
+          groupByDay[meal.date] = [meal.meal.meal];
+        }
+      }, {});
+
+      const dates = Object.keys(groupByDay);
+      const newGroupByDay = {};
+
+      dates.sort();
+      for (let i = 0; i < dates.length; i++) {
+        newGroupByDay[dates[i]] = groupByDay[dates[i]];
+      }
+      groupByDay = newGroupByDay
+      this.setState({groupByDay});
+    })
+    .catch((err) => {
+      notify.show(err.response.data.message, 'error', 3000);
+    });
   }
 
   componentDidMount() {
@@ -213,37 +248,7 @@ export default class Profile extends React.Component {
       })
       .catch((err) => console.error(err));
 
-      let groupByDay = {};
-      let sumByDay = {}
-      axios({
-        method: 'get',
-        url: '/users_meals_data'
-      })
-      .then((res) => {
-        this.setState({usersMeals: res.data});
-      })
-      .then(() => {
-        this.state.usersMeals.reduce((acc, meal, idx) => {
-          if (groupByDay.hasOwnProperty(meal.date)){
-            groupByDay[meal.date].push(meal.meal.meal);
-          } else {
-            groupByDay[meal.date] = [meal.meal.meal];
-          }
-        }, {});
-
-        const dates = Object.keys(groupByDay);
-        const newGroupByDay = {};
-
-        dates.sort();
-        for (let i = 0; i < dates.length; i++) {
-          newGroupByDay[dates[i]] = groupByDay[dates[i]];
-        }
-        groupByDay = newGroupByDay
-        this.setState({groupByDay});
-      })
-      .catch((err) => {
-        notify.show(err.response.data.message, 'error', 3000);
-      });
+    this.resetState();
   }
 
   render() {
@@ -251,7 +256,7 @@ export default class Profile extends React.Component {
       <div>
         <Redirect to="/profile" />
         <Match pattern="/profile" render={() => <ProfileLanding firstName={this.state.firstName}/>} />
-        <Match pattern="/search" render={() => <SearchMeals {...this.state}/>}  />
+        <Match pattern="/search" render={() => <SearchMeals {...this.state} resetState={this.resetState}/>}  />
         <Match pattern="/review" render={() => <ReviewMeals {...this.state}/>} />
         <Match pattern="/analyze" render={() => <Analyze {...this.state}/>} />
       </div>

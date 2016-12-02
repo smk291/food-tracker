@@ -70,6 +70,9 @@ export default class SearchResults extends React.Component {
     this.props.setName(mealName)
   }
 
+  sumNutr() {
+    this.props.sumNutr();
+  }
   // const nutrients1 = ['Energy', 'Energy (kJ)', 'Total lipid (fat)', 'Fatty acids, total saturated', 'Fatty acids, total monounsaturated', 'Fatty acids, total polyunsaturated', 'Fatty acids, total trans', 'Fatty acids, total trans-monoenoic', 'Fatty acids, total trans-polyenoic', 'Cholesterol', 'Sodium, Na', 'Protein',}) 'Potassium, K', 'Carbohydrate, by difference', 'Fiber, total dietary', 'Sugars, total', 'Glucose (dextrose)', 'Fructose', 'Galactose', 'Lactose', 'Maltose', 'Starch', 'Sucrose']
 
   render() {
@@ -94,9 +97,10 @@ export default class SearchResults extends React.Component {
 
 
       <div>
-        <button onClick={this.sumNutr}> Sum </button>
+        <button onClick={this.sumNutr.bind(this)}> Sum </button>
           <table>
-            <tbody>{this.props.alcohol}{this.props.caffeine}{this.props.water}{this.props.Energy}{this.props.EnergyKJ}{this.props.TotalFat}{this.props.FattyAcidsTotal}{this.props.FattyAcidsMonounsaturated}{this.props.FattyAcidsPolyunsaturated}{this.props.FattyAcidTrans}{this.props.FattyAcidsTransMono}{this.props.FattyAcidsTransP}{this.props.Cholesterol}{this.props.Na}{this.props.Protein}{this.props.Potassium}{this.props.Carb}{this.props.Fiber}{this.props.Sugars}{this.props.Glucose}{this.props.Fructose}{this.props.Galactose}{this.props.Lactose}{this.props.Maltose}{this.props.Starch}{this.props.Sucrose}</tbody>
+            <tbody>{this.props.alcohol.length > 0 ? this.props.alcohol : null}{this.props.caffeine.length > 0 ? this.props.caffeine : null}</tbody>
+            {/* {this.props.caffeine}{this.props.water}{this.props.Energy}{this.props.EnergyKJ}{this.props.TotalFat}{this.props.FattyAcidsTotal}{this.props.FattyAcidsMonounsaturated}{this.props.FattyAcidsPolyunsaturated}{this.props.FattyAcidTrans}{this.props.FattyAcidsTransMono}{this.props.FattyAcidsTransP}{this.props.Cholesterol}{this.props.Na}{this.props.Protein}{this.props.Potassium}{this.props.Carb}{this.props.Fiber}{this.props.Sugars}{this.props.Glucose}{this.props.Fructose}{this.props.Galactose}{this.props.Lactose}{this.props.Maltose}{this.props.Starch}{this.props.Sucrose} */}
           </table>
         <div
           className="items container">

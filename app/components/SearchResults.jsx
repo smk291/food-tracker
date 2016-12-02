@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchItem from './SearchItem';
 import NutritionForSearch from './NutritionForSearch';
-import TableElm from './TableElm';
+import Table from './Table';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -48,7 +48,6 @@ export default class SearchResults extends React.Component {
       }
     }, ``);
 
-    console.log(mealName);
     this.props.setName(mealName)
   }
 
@@ -68,34 +67,9 @@ export default class SearchResults extends React.Component {
     this.props.setName(mealName)
   }
 
-  sumNutr() {
-    this.props.sumNutr();
-  }
-
   render() {
-     const tableArr = this.props.nutrit.filter((elm) => {
-        if (this.props.nutrs[elm]) {
-          if (this.props.nutrs[elm][0] > 0) {
-            return elm;
-          }
-        }
-      }).map((elm, index) => {
-        return <TableElm
-          key={index}
-          name={elm}
-          amount={this.props.nutrs[elm]}
-        />
-      });
     return (
       <div>
-        {this.props.meal.length > 0 ? <button onClick={this.sumNutr.bind(this)}>Sum</button> : null}
-        <div className="container">
-          <table className="center">
-            <tbody>
-              {tableArr.length > 0 ? tableArr : null}
-            </tbody>
-          </table>
-        </div>
         <div
           className="items container">
           {this.props.meal.length > 0 && this.props.meal[0].data.foods.map((obj, idx) => {
@@ -115,8 +89,12 @@ export default class SearchResults extends React.Component {
               recalculate={this.recalculate}
               deleteItem={this.deleteItem}
               name={this.props.name}
+              sumNutr={this.props.sumNutr}
             />
           })}
+        </div>
+        <div>
+          {Object.keys(this.props.nutrs).length > 0 ? <Table nutrit={this.props.nutrit} nutrs={this.props.nutrs}/> : null}
         </div>
       </div>
     );

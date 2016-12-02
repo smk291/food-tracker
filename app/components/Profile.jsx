@@ -201,7 +201,23 @@ export default class Profile extends React.Component {
         "N/A 3": ["Chromium", 120],
         "N/A 4": ["Molybdenum", 75],
         "N/A 5": ["Chloride", 3400]
-      }
+      },
+      nutrit: [
+        'Energy',
+        'Energy (kJ)',
+        'Total lipid (fat)',
+        'Fatty acids, total saturated',
+        'Fatty acids, total monounsaturated',
+        'Fatty acids, total polyunsaturated',
+        'Fatty acids, total trans',
+        'Cholesterol',
+        'Sodium, Na',
+        'Protein',
+        'Potassium, K',
+        'Carbohydrate, by difference',
+        'Fiber, total dietary',
+        'Sugars, total'
+      ]
     };
     this.resetState = this.resetState.bind(this);
   }

@@ -5,27 +5,32 @@ import { notify } from 'react-notify-toast';
 import { Chart } from 'react-google-charts';
 import _ from 'lodash';
 import MealItems from './MealItems';
+import Options from './Options';
 
 export default class Analyze extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       chartOn: true,
-      options: {
-        title: 'Calories by Day',
-        hAxis: {title: 'Date'},
-        vAxis: {title: 'Calories (kcal)'},
-        legend: {position: 'bottom'}
-      },
+      chartOption: 'Energy',
+      options: {},
       rows: [],
-      columns: [],
+      columns: []
     };
+    this.organizeData = this.organizeData.bind(this);
   }
 
-  componentDidMount() {
+  organizeData() {
     let mealGroup = this.props.groupByDay;
     let mealSummed = [];
-    let rows = this.state.rows;
+    let rows = []
+    let titleString = this.state.chartOption;
+    let unit = '';
+
+    if (this.state.chartOption === 'Energy') {
+      titleString = 'Calories';
+    }
+
     let columns = [
       {
         'type': 'string',
@@ -33,7 +38,7 @@ export default class Analyze extends React.Component {
       },
       {
         'type': 'number',
-        'label': 'Calories'
+        'label': titleString
       }
     ];
 
@@ -57,30 +62,61 @@ export default class Analyze extends React.Component {
           }
         }
       }
-      newArr = [dateString, Number.parseFloat(nutrs.Energy[0])];
-      mealSummed.push(newArr)
+      newArr = [dateString, Number.parseFloat(nutrs[this.state.chartOption][0])];
+      unit = nutrs[this.state.chartOption][1];
+      mealSummed.push(newArr);
     });
+
+    const options = {
+      title: titleString + ' by Day',
+      hAxis: {title: 'Date'},
+      vAxis: {title: titleString + ' ' + unit},
+      legend: {position: 'bottom'}
+    };
 
     mealSummed.forEach((elm) => {
       rows.push(elm);
     });
-    this.setState({rows: rows, columns: columns})
+    this.setState({rows: rows, columns: columns, options: options});
+  }
+
+  handleChange(e) {
+    const value = e.target.value;
+    this.setState({chartOption: value}, () => {
+      this.organizeData();
+    });
+  }
+
+  componentDidMount() {
+    this.organizeData();
   }
 
   render() {
+    const optionArr = this.props.nutrit.map((elm, index) => {
+      let elmStr = elm;
+
+      if (elmStr === 'Energy') {
+        elmStr = 'Calories';
+      }
+
+      return <Options
+        key={index}
+        value={elm}
+        string={elmStr}
+      />
+    });
+
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Meal Analysis for {this.props.firstName}</h2></center>
         <div className="container">
-          {/* <div class="six columns">
-            <label for="chart">Reason for contacting</label>
-            <select class="u-full-width" id="chart">
-              <option value="Option 1">Questions</option>
-              <option value="Option 2">Admiration</option>
-              <option value="Option 3">Can I get your number?</option>
-            </select>
-          </div> */}
           <Chart className="section section-description chart" chartType="LineChart" rows={this.state.rows} columns={this.state.columns} options={this.state.options} graph_id="LineChart" width={'100%'} height={'50rem'}/>
+          <div className="six columns chartLabel">
+            <label htmlFor="chartOption">Please Choose an Option</label>
+            <select className="u-full-width" id="chartOption" onChange={this.handleChange.bind(this)}>
+              {optionArr}
+            </select>
+          </div>
         </div>
         <Link to="/profile" className="button">Back to Home</Link>
       </div>

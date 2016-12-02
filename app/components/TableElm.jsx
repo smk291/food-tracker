@@ -9,7 +9,7 @@ export default class TableElm extends React.Component {
     return (
       <tr>
         <td>{this.props.name === 'Energy' ? 'Calories' : this.props.name}</td>
-        <td>{this.props.amount[0]}{this.props.amount[1]}</td>
+        <td>{this.props.amount[0].toFixed(2)} {this.props.amount[1]}</td>
       </tr>
     );
   }

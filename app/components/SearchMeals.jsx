@@ -20,23 +20,7 @@ export default class SearchMeals extends React.Component {
       meal: '',
       postDate: '',
       postTime: '',
-      nutrs: {},
-      nutrit: [
-        'Energy',
-        'Energy (kJ)',
-        'Total lipid (fat)',
-        'Fatty acids, total saturated',
-        'Fatty acids, total monounsaturated',
-        'Fatty acids, total polyunsaturated',
-        'Fatty acids, total trans',
-        'Cholesterol',
-        'Sodium, Na',
-        'Protein',
-        'Potassium, K',
-        'Carbohydrate, by difference',
-        'Fiber, total dietary',
-        'Sugars, total'
-      ]
+      nutrs: {}
     };
     this.sumNutr = this.sumNutr.bind(this);
   }
@@ -189,7 +173,7 @@ export default class SearchMeals extends React.Component {
           setName={this.setName}
           nutrIds={this.props.nutrIds}
           nutrs={this.state.nutrs}
-          nutrit={this.state.nutrit}
+          nutrit={this.props.nutrit}
         />
         { this.state.name.length > 0 ? (
           <SubmitMeal

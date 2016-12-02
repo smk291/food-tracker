@@ -1,15 +1,13 @@
 import React from 'react';
 import SearchItem from './SearchItem';
 import NutritionForSearch from './NutritionForSearch';
+import TableElm from './TableElm';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.recalculate = this.recalculate.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
-    this.state = {
-
-    };
   }
 
   recalculate(idx, qty){
@@ -73,35 +71,31 @@ export default class SearchResults extends React.Component {
   sumNutr() {
     this.props.sumNutr();
   }
-  // const nutrients1 = ['Energy', 'Energy (kJ)', 'Total lipid (fat)', 'Fatty acids, total saturated', 'Fatty acids, total monounsaturated', 'Fatty acids, total polyunsaturated', 'Fatty acids, total trans', 'Fatty acids, total trans-monoenoic', 'Fatty acids, total trans-polyenoic', 'Cholesterol', 'Sodium, Na', 'Protein',}) 'Potassium, K', 'Carbohydrate, by difference', 'Fiber, total dietary', 'Sugars, total', 'Glucose (dextrose)', 'Fructose', 'Galactose', 'Lactose', 'Maltose', 'Starch', 'Sucrose']
 
   render() {
-    console.log(this.props.mealToPost);
-    console.log(this.props.nutrs);
-
-    const liquid = ['Alcohol, ethyl', 'Caffeine', 'Water'];
-
-
-    //
-
-    // const nutrients2 = ['Vitamin A, IU', 'Vitamin A, RAE', 'Carotene, alpha', 'Carotene, beta', 'Cryptoxanthin, beta', 'Vitamin C, total ascorbic acid', 'Vitamin D', 'Vitamin D (D2 + D3)', 'Vitamin E (alpha-tocopherol)', 'Vitamin K (phylloquinone)', 'Riboflavin', 'Niacin', 'Thiamin', 'Vitamin B-6', 'Folate, DFE', 'Folate, food', 'Folate, total', 'Folic acid', 'Vitamin B-12', 'Pantothenic acid', 'Calcium, Ca', 'Iron, Fe', 'Magnesium, Mg', 'Zinc, Zn', 'Selenium, Se', 'Copper, Cu', 'Manganese, Mn', 'Phosphorus, P', 'Fluoride, F']
-    //
-    // const essentialAminoAcids = ['Alanine', 'Arginine', 'Aspartic acid', 'Cystine', 'Glutamic acid', 'Glycine', 'Proline', 'Serine', 'Tyrosine']
-    //
-    // const nonessentialAminoAcids = ['Histidine', 'Isoleucine', 'Leucine', 'Lysine', 'Methionine', 'Phenylalanine', 'Threonine', 'Tryptophan', 'Valine']
-    //
-    // const misc = ['Betaine', 'Choline, total', 'Lycopene', 'Phytosterols', 'Retinol', 'Theobromine']
-
+     const tableArr = this.props.nutrit.filter((elm) => {
+        if (this.props.nutrs[elm]) {
+          if (this.props.nutrs[elm][0] > 0) {
+            return elm;
+          }
+        }
+      }).map((elm, index) => {
+        return <TableElm
+          key={index}
+          name={elm}
+          amount={this.props.nutrs[elm]}
+        />
+      });
     return (
-
-
-
       <div>
-        <button onClick={this.sumNutr.bind(this)}> Sum </button>
-          <table>
-            <tbody>{this.props.alcohol.length > 0 ? this.props.alcohol : null}{this.props.caffeine.length > 0 ? this.props.caffeine : null}</tbody>
-            {/* {this.props.caffeine}{this.props.water}{this.props.Energy}{this.props.EnergyKJ}{this.props.TotalFat}{this.props.FattyAcidsTotal}{this.props.FattyAcidsMonounsaturated}{this.props.FattyAcidsPolyunsaturated}{this.props.FattyAcidTrans}{this.props.FattyAcidsTransMono}{this.props.FattyAcidsTransP}{this.props.Cholesterol}{this.props.Na}{this.props.Protein}{this.props.Potassium}{this.props.Carb}{this.props.Fiber}{this.props.Sugars}{this.props.Glucose}{this.props.Fructose}{this.props.Galactose}{this.props.Lactose}{this.props.Maltose}{this.props.Starch}{this.props.Sucrose} */}
+        {this.props.meal.length > 0 ? <button onClick={this.sumNutr.bind(this)}>Sum</button> : null}
+        <div className="container">
+          <table className="center">
+            <tbody>
+              {tableArr.length > 0 ? tableArr : null}
+            </tbody>
           </table>
+        </div>
         <div
           className="items container">
           {this.props.meal.length > 0 && this.props.meal[0].data.foods.map((obj, idx) => {

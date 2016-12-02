@@ -57,7 +57,7 @@ export default class Analyze extends React.Component {
           }
         }
       }
-      newArr = [dateString, Number.parseFloat(nutrs.Calories[0])];
+      newArr = [dateString, Number.parseFloat(nutrs.Energy[0])];
       mealSummed.push(newArr)
     });
 
@@ -80,7 +80,7 @@ export default class Analyze extends React.Component {
               <option value="Option 3">Can I get your number?</option>
             </select>
           </div> */}
-          <Chart className="section section-description" chartType="LineChart" rows={this.state.rows} columns={this.state.columns} options={this.state.options} graph_id="LineChart" width={'100%'} height={'50rem'}/>
+          <Chart className="section section-description chart" chartType="LineChart" rows={this.state.rows} columns={this.state.columns} options={this.state.options} graph_id="LineChart" width={'100%'} height={'50rem'}/>
         </div>
         <Link to="/profile" className="button">Back to Home</Link>
       </div>

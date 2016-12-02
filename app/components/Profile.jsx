@@ -20,7 +20,7 @@ export default class Profile extends React.Component {
         "204": ["g", "Total lipid (fat)"],
         "205": ["g", "Carbohydrate, by difference"],
         "207": ["g", "Ash"],
-        "208": ["kcal", "Calories"],
+        "208": ["kcal", "Energy"],
         "209": ["g", "Starch"],
         "210": ["g", "Sucrose"],
         "211": ["g", "Glucose (dextrose)"],

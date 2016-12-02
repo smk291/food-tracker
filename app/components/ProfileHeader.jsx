@@ -23,7 +23,7 @@ export default class ProfileHeader extends React.Component {
         <Link onClick={this.navTransition} to="/profile">Profile Home</Link>
         <Link onClick={this.navTransition} to="/search">Search Meals</Link>
         <Link onClick={this.navTransition} to="/review">Review Meals</Link>
-        <a href="#">Analyze</a>
+        <Link onClick={this.navTransition} to="/analyze">Analyze</Link>
         <Link to="/" onClick={this.logout.bind(this)}>Log Out</Link>
       </div>
     );

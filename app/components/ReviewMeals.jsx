@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import MealItems from './MealItems';
+import { notify } from 'react-notify-toast';
 
 export default class ReviewMeals extends React.Component {
   constructor(props) {
@@ -31,11 +32,9 @@ export default class ReviewMeals extends React.Component {
       }, {})
       this.setState({groupByDay});
     })
-    .then(() => {
-      console.log(this.state.groupByDay);
-    })
     .catch((err) => {
       console.log(err);
+      notify.show(err.response.data.message, 'error', 3000);
     });
   }
 

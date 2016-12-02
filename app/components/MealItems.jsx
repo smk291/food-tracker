@@ -16,13 +16,14 @@ export default class MealItems extends React.Component {
       const year = newDate.getFullYear();
       const month = newDate.getMonth() + 1;
       const date = newDate.getDate();
-      const day = dayArr[newDate.getDay()]
+      const day = dayArr[newDate.getDay()];
       mealArr.push(<MealItem
         key={key}
         day={day}
         year={year}
         month={month}
         date={date}
+        meals={elm}
       />)
     });
     return (

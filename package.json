@@ -10,7 +10,10 @@
   "scripts": {
     "start": "brunch watch --server",
     "prod": "brunch build --production",
-    "knex": "knex"
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest",
+    "nodemon": "nodemon server.js",
+    "nf": "nf start"
   },
   "dependencies": {
     "axios": "^0.15.2",

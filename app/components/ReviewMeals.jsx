@@ -34,7 +34,6 @@ export default class ReviewMeals extends React.Component {
       this.setState({groupByDay});
     })
     .catch((err) => {
-      console.log(err);
       notify.show(err.response.data.message, 'error', 3000);
     });
   }
@@ -43,7 +42,7 @@ export default class ReviewMeals extends React.Component {
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Meal Summary for {this.props.firstName}</h2></center>
-        {this.state.groupByDay.length > 0 ? (
+        {Object.keys(this.state.groupByDay).length > 0 ? (
           <MealItems
             groupByDay={this.state.groupByDay}
           />

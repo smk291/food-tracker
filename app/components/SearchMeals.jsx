@@ -23,6 +23,7 @@ export default class SearchMeals extends React.Component {
       nutrs: {}
     };
     this.sumNutr = this.sumNutr.bind(this);
+    this.resetNutr = this.resetNutr.bind(this);
   }
 
   setName(name) {
@@ -156,6 +157,10 @@ export default class SearchMeals extends React.Component {
     this.setState({nutrs});
   }
 
+  resetNutr() {
+    this.setState({nutrs: {}});
+  }
+
   render() {
     return (
       <div className="section with-second-background background-adjust">
@@ -183,6 +188,7 @@ export default class SearchMeals extends React.Component {
             postTime={this.state.postTime}
             handleChange={this.handleChange}
             postMeal={this.postMeal}
+            resetNutr={this.resetNutr}
           />) : null }
           <Link to="/profile" className="button">Back to Home</Link>
       </div>

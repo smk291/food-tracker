@@ -21,7 +21,7 @@ export default class SubmitMeal extends React.Component {
       <div className="container meal-form">
         <form id="postMeal" onSubmit={this.handleSubmit}>
           <input
-            className="mealName"
+            className="mealName u-full-width"
             placeholder="name"
             id="name"
             type="text"

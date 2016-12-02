@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import SubmitMeal from './SubmitMeal';
 import { notify } from 'react-notify-toast';
+import { Link } from 'react-router';
 
 export default class SearchMeals extends React.Component {
   constructor() {
@@ -316,6 +317,7 @@ export default class SearchMeals extends React.Component {
             handleChange={this.handleChange}
             postMeal={this.postMeal}
           />) : null }
+          <Link to="/profile" className="button">Back to Home</Link>
       </div>
     );
   }

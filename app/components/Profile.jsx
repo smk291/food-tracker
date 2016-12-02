@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { Match, Redirect } from 'react-router';
+import { notify } from 'react-notify-toast';
 import ProfileLanding from './ProfileLanding';
 import SearchMeals from './SearchMeals';
 import ReviewMeals from './ReviewMeals';
+import Analyze from './Analyze';
 
 export default class Profile extends React.Component {
   constructor() {
@@ -11,12 +13,14 @@ export default class Profile extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
+      usersMeals: [],
+      groupByDay: {},
       nutrIds: {
         "203": ["g", "Protein"],
         "204": ["g", "Total lipid (fat)"],
         "205": ["g", "Carbohydrate, by difference"],
         "207": ["g", "Ash"],
-        "208": ["kcal", "Energy"],
+        "208": ["kcal", "Calories"],
         "209": ["g", "Starch"],
         "210": ["g", "Sucrose"],
         "211": ["g", "Glucose (dextrose)"],
@@ -172,7 +176,39 @@ export default class Profile extends React.Component {
         const { firstName, lastName } = res.data;
         this.setState({ firstName, lastName })
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.error(err));
+
+      let groupByDay = {};
+      let sumByDay = {}
+      axios({
+        method: 'get',
+        url: '/users_meals_data'
+      })
+      .then((res) => {
+        this.setState({usersMeals: res.data});
+      })
+      .then(() => {
+        this.state.usersMeals.reduce((acc, meal, idx) => {
+          if (groupByDay.hasOwnProperty(meal.date)){
+            groupByDay[meal.date].push(meal.meal.meal);
+          } else {
+            groupByDay[meal.date] = [meal.meal.meal];
+          }
+        }, {});
+
+        const dates = Object.keys(groupByDay);
+        const newGroupByDay = {};
+
+        dates.sort();
+        for (let i = 0; i < dates.length; i++) {
+          newGroupByDay[dates[i]] = groupByDay[dates[i]];
+        }
+        groupByDay = newGroupByDay
+        this.setState({groupByDay});
+      })
+      .catch((err) => {
+        notify.show(err.response.data.message, 'error', 3000);
+      });
   }
 
   render() {
@@ -182,6 +218,7 @@ export default class Profile extends React.Component {
         <Match pattern="/profile" render={() => <ProfileLanding firstName={this.state.firstName}/>} />
         <Match pattern="/search" render={() => <SearchMeals {...this.state}/>}  />
         <Match pattern="/review" render={() => <ReviewMeals {...this.state}/>} />
+        <Match pattern="/analyze" render={() => <Analyze {...this.state}/>} />
       </div>
     );
   }

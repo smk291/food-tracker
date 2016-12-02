@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router';
 import MealItems from './MealItems';
 import { notify } from 'react-notify-toast';
 
@@ -42,9 +43,16 @@ export default class ReviewMeals extends React.Component {
     return (
       <div className="section with-second-background background-adjust">
         <center><h2 className="heading">Meal Summary for {this.props.firstName}</h2></center>
-        <MealItems
-          groupByDay={this.state.groupByDay}
-        />
+        {this.state.groupByDay.length > 0 ? (
+          <MealItems
+            groupByDay={this.state.groupByDay}
+          />
+        ) : (
+          <div>
+            <h3>Opps! Seems like you haven't saved any meals!</h3>
+            <Link to="/search" className="button button-primary">Click Here to Start!</Link>
+          </div>
+        )}
       </div>
     );
   }

@@ -45,11 +45,11 @@
     "react-router": "^4.0.0-alpha.6",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "foreman": "^2.0.0"
+    "foreman": "^2.0.0",
+    "uglify-js-brunch": "^2.0.0"
   },
   "devDependencies": {
     "dotenv": "^2.0.0",
-    "uglify-js-brunch": "^2.0.0"
   },
   "engines": {
     "node": "DEV_VERSION"

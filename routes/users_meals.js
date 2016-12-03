@@ -48,8 +48,7 @@ router.get('/users_meals/:id', authorize, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
-
+    });
 });
 
 //Get individual user_meal with meal data
@@ -71,8 +70,7 @@ router.get('/users_meals_data/:id', authorize, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
-
+    });
 });
 
 //Get all of user's user_meals
@@ -86,8 +84,7 @@ router.get('/users_meals/', authorize, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
-
+    });
 });
 
 //Get all of user's user_meals with data
@@ -103,8 +100,7 @@ router.get('/users_meals_data/', authorize, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
-
+    });
 });
 
 // Patch unnecessary

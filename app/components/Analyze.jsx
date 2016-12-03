@@ -23,7 +23,7 @@ export default class Analyze extends React.Component {
   organizeData() {
     let mealGroup = this.props.groupByDay;
     let mealSummed = [];
-    let rows = []
+    let rows = [];
     let titleString = this.state.chartOption;
     let unit = '';
 
@@ -103,7 +103,7 @@ export default class Analyze extends React.Component {
         key={index}
         value={elm}
         string={elmStr}
-      />
+      />;
     });
 
     return (

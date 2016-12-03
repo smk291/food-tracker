@@ -9,7 +9,7 @@ exports.up = (knex) => {
     table.specificType('hashed_password', 'char(60)')
      .notNullable();
     table.timestamps(true, true);
-  })
+  });
 };
 
 exports.down = (knex) => {

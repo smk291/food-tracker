@@ -44,7 +44,7 @@ router.post('/meals', authorize, ev(validations.post), (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
+    });
 });
 
 //Get individual meal
@@ -57,7 +57,7 @@ router.get('/meals/:id', authorize, (req, res, next) => {
   .first()
   .then((meal) => {
     if (meal === [] || !meal) {
-      throw boom.create(400, `No meals exist for user`)
+      throw boom.create(400, `No meals exist for user`);
     }
 
     res.send(meal);
@@ -111,7 +111,7 @@ router.patch('/meals/:id', authorize, ev(validations.post), (req, res, next) => 
       })
       .catch((err) => {
         next(err);
-      })
+      });
 
     const updateRow = {};
 
@@ -138,7 +138,7 @@ router.patch('/meals/:id', authorize, ev(validations.post), (req, res, next) => 
 router.delete('/meals/:id', authorize, (req, res, next) => {
   const mealId = req.params.id;
   const { userId } = req.token;
-  const deleted = {}
+  const deleted = {};
 
   knex('meals')
     .where('id', mealId)
@@ -154,7 +154,7 @@ router.delete('/meals/:id', authorize, (req, res, next) => {
       .where('meal_id', mealId)
       .then((row) => {
         if (Number(row.user_id) !== userId && row.user_id) {
-          throw boom.create(400, `Meal_id ${mealId} does not belong to current user user.id ${userId}`)
+          throw boom.create(400, `Meal_id ${mealId} does not belong to current user user.id ${userId}`);
         }
       })
       .catch((err) => {
@@ -182,7 +182,7 @@ router.delete('/meals/:id', authorize, (req, res, next) => {
       })
       .catch((err) => {
         next(err);
-      })
+      });
     })
     .catch((err) => {
       next(err);

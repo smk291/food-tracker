@@ -46,7 +46,7 @@ router.post('/metrics', authorize, ev(validations.post), (req, res, next) => {
       knex('metrics')
         .insert(decamelizeKeys(newMetrics), '*')
         .then((row) => {
-          res.send(row)
+          res.send(row);
         });
       })
     .catch((err) => {
@@ -62,11 +62,11 @@ router.get('/metrics', authorize, (req, res, next) => {
     .where('user_id', userId)
     .first()
     .then((userMetrics) => {
-      res.send(camelizeKeys(userMetrics))
+      res.send(camelizeKeys(userMetrics));
     })
     .catch((err) => {
       next(err);
-    })
+    });
 });
 
 //Get a user's metrics
@@ -77,11 +77,11 @@ router.get('/metrics/:id', authorize, (req, res, next) => {
     .where('user_id', id)
     .first()
     .then((userMetrics) => {
-      res.send(camelizeKeys(userMetrics))
+      res.send(camelizeKeys(userMetrics));
     })
     .catch((err) => {
       next(err);
-    })
+    });
 });
 
 // Patch a user's metrics
@@ -94,7 +94,7 @@ router.patch('/metrics', authorize, ev(validations.post), (req, res, next) => {
     .first()
     .then((row) => {
       if (!row) {
-        throw boom.create(400, `No metrics exist for current user`)
+        throw boom.create(400, `No metrics exist for current user`);
       }
 
       const updateMetrics = { age, weight, height, activities, allergies, preferences, goals};
@@ -103,10 +103,10 @@ router.patch('/metrics', authorize, ev(validations.post), (req, res, next) => {
 
       return knex('metrics')
         .where('user_id', userId)
-        .update(decamelizeKeys(updateMetrics), '*')
+        .update(decamelizeKeys(updateMetrics), '*');
     })
     .then((row) => {
-      res.send(camelizeKeys(row))
+      res.send(camelizeKeys(row));
     })
     .catch((err) => {
       next(err);

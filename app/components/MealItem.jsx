@@ -54,7 +54,7 @@ export default class MealItem extends React.Component {
           number={key}
           totalCal={this.totalCalories}
         />
-      )
+      );
     });
 
     return (

@@ -40,7 +40,7 @@ export default class SearchMeals extends React.Component {
     e.preventDefault();
 
     let meal = {};
-    let mealToPost = []
+    let mealToPost = [];
     axios({
       method: 'post',
       url: 'https://trackapi.nutritionix.com//v2/natural/nutrients',

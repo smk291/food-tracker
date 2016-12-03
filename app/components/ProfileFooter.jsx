@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default class ProfileFooter extends React.Component {
   constructor(props) {
     super(props);
-    this.logout = this.logout.bind(this)
+    this.logout = this.logout.bind(this);
   }
 
   logout() {

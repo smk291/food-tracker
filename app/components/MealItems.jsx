@@ -24,7 +24,7 @@ export default class MealItems extends React.Component {
         month={month}
         date={date}
         meals={elm}
-      />)
+      />);
     });
     return (
       <div className="items container">

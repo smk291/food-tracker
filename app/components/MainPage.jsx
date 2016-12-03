@@ -14,7 +14,7 @@ export default class MainPage extends React.Component {
       password: '',
       firstName: '',
       lastName: '',
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);

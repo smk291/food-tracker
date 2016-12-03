@@ -7,7 +7,7 @@ export default class Meal extends React.Component {
   }
 
   componentDidMount() {
-    this.props.totalCal(this.props.meal)
+    this.props.totalCal(this.props.meal);
   }
 
   render() {

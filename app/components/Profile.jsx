@@ -224,7 +224,7 @@ export default class Profile extends React.Component {
 
   resetState() {
     let groupByDay = {};
-    let sumByDay = {}
+    let sumByDay = {};
     axios({
       method: 'get',
       url: '/users_meals_data'
@@ -248,7 +248,7 @@ export default class Profile extends React.Component {
       for (let i = 0; i < dates.length; i++) {
         newGroupByDay[dates[i]] = groupByDay[dates[i]];
       }
-      groupByDay = newGroupByDay
+      groupByDay = newGroupByDay;
       this.setState({groupByDay});
     })
     .catch((err) => {
@@ -260,7 +260,7 @@ export default class Profile extends React.Component {
     axios.get('/users')
       .then((res) => {
         const { firstName, lastName } = res.data;
-        this.setState({ firstName, lastName })
+        this.setState({ firstName, lastName });
       })
       .catch((err) => console.error(err));
 

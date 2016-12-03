@@ -8,7 +8,7 @@ export default class SearchItem extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       qty: ''
-    }
+    };
   }
 
   handleChange(e) {
@@ -21,7 +21,7 @@ export default class SearchItem extends React.Component {
   }
 
   recalculate(e){
-    e.preventDefault()
+    e.preventDefault();
     this.props.recalculate(this.props.idx, this.state.qty);
     this.props.sumNutr();
   }

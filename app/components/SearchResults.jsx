@@ -12,8 +12,8 @@ export default class SearchResults extends React.Component {
 
   recalculate(idx, qty){
     let recalcMeal = this.props.meal;
-    let food = recalcMeal[0].data.foods[idx]
-    let fullNutrs = recalcMeal[0].data.foods[idx].full_nutrients
+    let food = recalcMeal[0].data.foods[idx];
+    let fullNutrs = recalcMeal[0].data.foods[idx].full_nutrients;
 
     for (let i = 0; i < fullNutrs.length; i++){
       fullNutrs[i].value = (fullNutrs[i].value / recalcMeal[0].data.foods[idx].serving_qty) * qty;
@@ -38,7 +38,7 @@ export default class SearchResults extends React.Component {
     };
 
     food.serving_qty = qty;
-    this.setState({meal: recalcMeal})
+    this.setState({meal: recalcMeal});
 
     const mealName = recalcMeal[0].data.foods.reduce((acc, food, i, arr) => {
       if (idx < arr.length - 1) {
@@ -48,12 +48,12 @@ export default class SearchResults extends React.Component {
       }
     }, ``);
 
-    this.props.setName(mealName)
+    this.props.setName(mealName);
   }
 
   deleteItem(idx) {
     let updateMeal = this.props.meal;
-    updateMeal[0].data.foods.splice(idx, 1)
+    updateMeal[0].data.foods.splice(idx, 1);
     this.setState({meal: updateMeal});
 
     const mealName = updateMeal[0].data.foods.reduce((acc, food, i, arr) => {
@@ -64,7 +64,7 @@ export default class SearchResults extends React.Component {
       }
     }, ``);
 
-    this.props.setName(mealName)
+    this.props.setName(mealName);
   }
 
   render() {
@@ -90,7 +90,7 @@ export default class SearchResults extends React.Component {
               deleteItem={this.deleteItem}
               name={this.props.name}
               sumNutr={this.props.sumNutr}
-            />
+            />;
           })}
         </div>
         <div>

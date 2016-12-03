@@ -22,7 +22,7 @@ export default class Table extends React.Component {
          key={index}
          name={elm}
          amount={this.props.nutrs[elm]}
-       />
+       />;
      });
 
     return (

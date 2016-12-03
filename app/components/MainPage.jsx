@@ -67,7 +67,7 @@ export default class MainPage extends React.Component {
       this.login(e);
     })
     .catch((err) => {
-      console.error(err);
+      notify.show(err.response.data.errors[0].messages[0], 'error', 3000);
     });
   }
 

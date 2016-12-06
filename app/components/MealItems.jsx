@@ -13,6 +13,8 @@ export default class MealItems extends React.Component {
 
     _.forEach(this.props.groupByDay, (elm, key) => {
       const newDate = new Date(key);
+      console.log(key);
+      console.log(newDate);
       const year = newDate.getFullYear();
       const month = newDate.getMonth() + 1;
       const date = newDate.getDate();

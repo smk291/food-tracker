@@ -1,6 +1,6 @@
 # Food App Tracker
 
-Food app tracker is a web app that does two things: 
+Food App Tracker is a web app that does two things: 
 1) It helps user easily keep a detailed record of their food intake.
 2) It provides easily understood, detailed nutritional analysis, so that users can easily see where their diet might benefit from tweaking.
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchItem from './SearchItem';
-import NutritionForSearch from './NutritionForSearch';
 import Table from './Table';
 
 export default class SearchResults extends React.Component {

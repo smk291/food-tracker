@@ -15,12 +15,12 @@ export default class MealItems extends React.Component {
       const newDate = new Date(key);
       console.log(newDate);
       console.log(newDate.toUTCString());
-      const altDate = new Date(newDate.toUTCString());
-      console.log(altDate);
       const year = newDate.getFullYear();
       const month = newDate.getMonth() + 1;
       const date = newDate.getDate();
       const day = dayArr[newDate.getDay()];
+      const altDate = new Date(Date.UTC(year, month - 1, date));
+      console.log(altDate);
       mealArr.push(<MealItem
         key={key}
         day={day}

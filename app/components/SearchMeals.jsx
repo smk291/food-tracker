@@ -107,9 +107,6 @@ export default class SearchMeals extends React.Component {
   }
 
   postMeal (name, meal, date, time) {
-    const newDate = new Date(date);
-    console.log(date);
-    console.log(newDate);
     axios({
       method: 'post',
       url: '/meals',

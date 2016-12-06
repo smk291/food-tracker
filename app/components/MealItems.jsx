@@ -20,10 +20,12 @@ export default class MealItems extends React.Component {
    ];
 
     _.forEach(this.props.groupByDay, (elm, key) => {
+      console.log(key);
       const newDate = new Date(key.toString().substring(0, key.indexOf('T')));
       // .toUTCString();
       // const altDate = newDate.split(' ');
       // console.log(altDate);
+      console.log(newDate);
       const year = newDate.getFullYear();
       const month = newDate.getMonth() + 1;
       const date = newDate.getDate();

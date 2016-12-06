@@ -12,6 +12,7 @@ export default class MealItems extends React.Component {
     const dayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     _.forEach(this.props.groupByDay, (elm, key) => {
+      console.log(key);
       const newDate = new Date(key);
       console.log(newDate);
       console.log(newDate.toUTCString());

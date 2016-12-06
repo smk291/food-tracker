@@ -113,7 +113,7 @@ export default class SearchMeals extends React.Component {
       data: {
         name: name,
         meal: meal,
-        date: newDate,
+        date: date,
         time: time
       }
     })

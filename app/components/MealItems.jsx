@@ -9,14 +9,21 @@ export default class MealItems extends React.Component {
 
   render() {
     let mealArr = [];
-    const dayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayArr = [
+     'Sunday',
+     'Monday',
+     'Tuesday',
+     'Wednesday',
+     'Thursday',
+     'Friday',
+     'Saturday'
+   ];
 
     _.forEach(this.props.groupByDay, (elm, key) => {
-      const newDate = new Date(key);
-      const altDate = new Date(newDate.toUTCString());
-      console.log(key);
-      console.log(newDate);
-      console.log(altDate);
+      const newDate = new Date(key.toString().substring(0, key.indexOf('T')));
+      // .toUTCString();
+      // const altDate = newDate.split(' ');
+      // console.log(altDate);
       const year = newDate.getFullYear();
       const month = newDate.getMonth() + 1;
       const date = newDate.getDate();
